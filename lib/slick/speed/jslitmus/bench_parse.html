@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>Parse benchmarks</title>
+
+<style type="text/css" media="screen">
+</style>
+
+<!-- JSSpec -->
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpec.js"></script>
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpecHelpers.js"></script>
+
+<!-- Slick -->
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Parser.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Finder.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickThis = Slick;
+this.Slick = null;
+</script>
+
+<script> document.write('<scr'+'ipt src="../frameworks/slick.js?last&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickLast = Slick;
+this.Slick = null;
+</script>
+<script src="../frameworks/nwmatcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../frameworks/sizzle.js" type="text/javascript" charset="utf-8"></script>
+<script src="../frameworks/yass.css3.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpecHelpers_slick.js" charset="utf-8"></script>
+
+<!-- benchmarker -->
+<script src="JSLitmus.js" type="text/javascript" charset="utf-8"></script>
+<script src="JSLitmusHelpers.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- benchmarks -->
+<script src="bench_parse.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Runner -->
+<script type="text/javascript" src="../../SlickSpec/assets/simple_request.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+global.disableQSA = true;
+global.selectors = [];
+try{
+	global.selectors = global.selectors.concat(decodeURIComponent(document.location.search.match(/selectors=(.*?)(&|$)/)[1]).replace(/\+/g,' ').split(/\r?\n/));
+}catch(e){}
+if (global.selectors.length === 0)
+global.selectors = [
+
+	// TAG
+	'body'                        ,
+	'div'                         ,
+	'body div'                    ,
+	'div p'                       ,
+	
+	// ID
+	'#title'                      ,
+	'h1#title'                    ,
+	'div #title'                  ,
+	'* #title'                    ,
+
+	// CLASS
+	'.note'                       ,
+	'div.example'                 ,
+	'ul .tocline2'                ,
+	'div.example, div.note'       ,
+	'ul.toc li.tocline2'          ,
+	'ul.toc > li.tocline2'        ,
+
+	// ATTRIB
+	'div[class^=exa][class$=mple]',
+	'a[href][lang][class]'        ,
+	'div[class]'                  ,
+	'div[class=example]'          ,
+	'div[class^=exa]'             ,
+	'div[class$=mple]'            ,
+	'div[class*=e]'               ,
+	'div[class|=dialog]'          ,
+	'div[class!=made_up]'         ,
+	'div[class~=example]'         ,
+	
+	// PSEUDO
+	'div:not(.example)'           ,
+	'p:contains(selectors)'       ,
+	'p:nth-child(even)'           ,
+	'p:nth-child(2n)'             ,
+	'p:nth-child(odd)'            ,
+	'p:nth-child(2n+1)'           ,
+	'p:nth-child(n)'              ,
+	'p:only-child'                ,
+	'p:last-child'                ,
+	'p:first-child'               ,
+	
+	// COMBONATORS
+	'div > p'                     ,
+	'div + p'                     ,
+	'div ~ p'                     ,
+	'div p a'                     ,
+	
+	// MULTIPLE
+	'div, p, a'                   ,
+	
+	// COMPLEX
+	'h1#title + div > p'          ,
+	'h1[id]:contains(Selectors)'  ,
+
+
+	''
+];
+
+new Mock(/\b(html)\b/i, benchmarkParser);
+
+</script>
+<style type="text/css" media="screen">
+
+textarea{
+	width: 240px;
+/*	height: 320px;*/
+	font-family: consolas, monaco, monospace;
+	font-size: 10px;
+	line-height: 12px !important;
+}
+
+</style>
+</head>
+<body>
+
+<div>
+	<ul>
+		<li><a href="?">Reset Selectors</a></li>
+		<li><a href="?selectors=.note%0D%0A.note.note%0D%0A.a1%0D%0A.a2%0D%0A.a3%0D%0A.a4%0D%0A.a5%0D%0A.a6%0D%0A">ClassNames</a></li>
+		<li><a href="?selectors=html%0D%0Abody%0D%0Adiv%0D%0Aa%0D%0Aflarm">Tags</a></li>
+		<li><a href="?selectors=%23title%0D%0Ah1%23title%0D%0Adiv+%23title%0D%0A*+%23title%0D%0A">IDs</a></li>
+	</ul>
+	<form action="" method="get">
+		<script type="text/javascript" charset="utf-8">
+
+document.write('<textarea name="selectors">');
+document.write(global.selectors.join("\n"));
+document.write('</textarea>');
+
+		</script>
+		<p><input type="submit" value="Update Selectors" /></p>
+	</form>
+</div>
+
+<!-- mocks -->
+<iframe onload="Mock.register('tmpl html std',this.contentWindow)" src="../../SlickSpec/mocks/template-standard.html"></iframe>
+
+<script type="text/javascript" charset="utf-8">
+document.getElementsByTagName('textarea')[0].style.height = global.selectors.length * 12 + 24 + 'px';
+</script>
+
+<hr />
+
+<h1> <strong>Slick Developer</strong> Benchmarks for pre-release <strong>Slick</strong> </h1>
+
+</body>
+</html>

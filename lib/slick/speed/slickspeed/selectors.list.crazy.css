@@ -1,0 +1,319 @@
+li,p 
+address 
+* ul, p *.t1 
+* ul, p *.t1 
+#foo p 
+p p[title] 
+address address[title="foo"] span[title="a"] 
+p p[class~="b"] address address[title~="foo"] span[class~="b"] 
+p [title~="hello world"] 
+p p[lang|="en"] address address[lang="fi"] span[lang|="fr"] 
+p p[title^="foo"] 
+p p[title$="bar"] 
+p p[title*="bar"] 
+li .t1 li.t2 .t3 
+p p.t1 p.t2 
+div div.teST div.te div.st div.te.st 
+p .t1.fail .fail.t1 .t2.fail .fail.t2 
+p p.t1.t2 div div.t1 address address.t5.t5 
+p .t1:not(.t2) :not(.t2).t1 .t2:not(.t1) :not(.t1).t2 
+p p:not(.t1):not(.t2) div div:not(.t1) address address:not(.t5):not(.t5) 
+li #t1 li#t2 li#t3 #t4 
+p #test#fail #fail#test #fail div #pass#pass 
+.warning div #Aone#Atwo, #Aone#Athree, #Atwo#Athree p #Bone#Btwo, #Bone#Bthree, #Btwo#Bthree #Cone#Ctwo, #Cone#Cthree, #Ctwo#Cthree #Done#Dtwo, #Done#Dthree, #Dtwo#Dthree 
+p.test a p.test *:link 
+p.test a p.test *:visited 
+p:hover a:hover 
+tr:hover td:hover 
+table 
+p 
+.a a:hover 
+.b a:hover .b a:link 
+.c :link .c :visited:hover 
+div:hover > p:first-child 
+:link, :visited :link:hover span 
+a:active 
+button:active 
+a:focus 
+p:target 
+p p:target 
+:root :target 
+ul > li li:lang(en-GB) 
+button input button:enabled input:enabled 
+button input button:disabled input:disabled 
+input, span input:checked, input:checked + span 
+html *:root 
+:root:first-child :root:last-child :root:only-child :root:nth-child(1) :root:nth-child(n) :root:nth-last-child(1) :root:nth-last-child(n) :root:first-of-type :root:last-of-type :root:only-of-type :root:nth-of-type(1) :root:nth-of-type(n) :root:nth-last-of-type(1) :root:nth-last-of-type(n) p 
+* html * :root p 
+.red ul > li:nth-child(odd) ol > li:nth-child(even) table.t1 tr:nth-child(-n+4) table.t2 td:nth-child(3n+1) 
+.green ul > li:nth-child(odd) ol > li:nth-child(even) table.t1 tr:nth-child(-n+4) table.t2 td:nth-child(3n+1) 
+.red ul > li:nth-last-child(odd) ol > li:nth-last-child(even) table.t1 tr:nth-last-child(-n+4) table.t2 td:nth-last-child(3n+1) 
+.green ul > li:nth-last-child(odd) ol > li:nth-last-child(even) table.t1 tr:nth-last-child(-n+4) table.t2 td:nth-last-child(3n+1) 
+.red p:nth-of-type(3) dl > :nth-of-type(3n+1) 
+.red p:nth-last-of-type(3) dl > :nth-last-of-type(3n+1) 
+.red .t1 td:first-child p > *:first-child 
+.red .t1 td:last-child p > *:last-child 
+.red address address:first-of-type 
+.red address address:last-of-type 
+.red p:only-child div.testText > div > p 
+.red .t1 :only-of-type 
+p:first-line 
+p:first-letter 
+p:first-letter p:before 
+p::first-letter 
+p::first-letter  p::before 
+p::selection 
+p::before 
+p:before 
+p::after 
+p:after 
+.white .red div.t1 p 
+.white .green div.t1 p 
+.white .red div > p.test 
+.white .green div > p.test 
+.fail > div   .control 
+#fail > div   p 
+.red div.stub > p + p 
+.green .white div.stub > p + p 
+.fail + div   .control 
+.red div.stub > p ~ p 
+.green div.stub > p ~ p 
+div.stub span, div.stub address, div.stub *|q, div.stub *|r address, *|q, *|r div.stub *:not(p) 
+div.stub > *|* div.stub > *|*:not(*) 
+div.stub > *|* div.stub > *|*:not() 
+a|* div.stub *|*:not([test]) 
+div.stub > p div.stub > a|* div.stub *|*:not([test="1"]) 
+div.stub p div.stub > a|*, div.stub > b|* div.stub *|*:not([test~="foo"]) div.stub *|p:not([class~="foo"]) div.stub b|*[test~="foo2"] 
+div.stub p div.stub > a|*, div.stub > b|* div.stub *|*:not([test|="foo-bar"]) div.stub *|p:not([lang|="en-us"]) div.stub b|*[test|="foo2-bar"] 
+div.stub > * div.stub *:not([title^="si on"]) 
+div.stub > * div.stub *:not([title$="tait"]) 
+div.stub > * div.stub *:not([title*=" on"]) 
+*|p, *|q, *|r *|p, *|r div.stub *:not([a|title]) 
+*|p, *|q, *|r *|p, *|r div.stub *:not([a|title]) 
+div.stub > * div.stub *:not(.foo) 
+div.stub > * div.stub *:not(#foo) 
+div.stub > * div.stub *:not(:link) 
+div.stub > * div.stub *:not(:visited) 
+div.stub * div.stub > * > *:not(:hover) 
+div.stub * div.stub > * > *:not(:active) 
+a:not(:focus) a 
+p p:not(:target) 
+p p:not(:target) 
+div.stub * div.stub *:not(:lang(fr)) 
+button input button:not(:enabled) input:not(:enabled)  
+button input button:not(:disabled) input:not(:disabled) 
+input, span input:not(:checked), input:not(:checked) + span 
+p:not(:root) div * 
+html:not(:root), test:not(:root) p 
+.red ul > li:not(:nth-child(odd)) ol > li:not(:nth-child(even)) table.t1 tr:not(:nth-child(-n+4)) table.t2 td:not(:nth-child(3n+1)) table.t1 td, table.t2 td 
+.green ul > li:not(:nth-child(odd)) ol > li:not(:nth-child(even)) table.t1 tr:not(:nth-child(-n+4)) table.t2 td:not(:nth-child(3n+1)) table.t1 td, table.t2 td 
+.red ul > li:not(:nth-last-child(odd)) ol > li:not(:nth-last-child(even)) table.t1 tr:not(:nth-last-child(-n+4)) table.t2 td:not(:nth-last-child(3n+1)) table.t1 td, table.t2 td 
+.green ul > li:not(:nth-last-child(odd)) ol > li:not(:nth-last-child(even)) table.t1 tr:not(:nth-last-child(-n+4)) table.t2 td:not(:nth-last-child(3n+1)) table.t1 td, table.t2 td 
+.red p:not(:nth-of-type(3)) dl > *:not(:nth-of-type(3n+1)) 
+.green p:not(:nth-of-type(3)) dl > *:not(:nth-of-type(3n+1)) 
+.red p:not(:nth-last-of-type(3)) dl > *:not(:nth-last-of-type(3n+1)) 
+.green p:not(:nth-last-of-type(3)) dl > *:not(:nth-last-of-type(3n+1)) 
+.red .t1 td:not(:first-child) p > *:not(:first-child) table.t1 td 
+.green .t1 td:not(:first-child) p > *:not(:first-child) table.t1 td 
+.red .t1 td:not(:last-child) p > *:not(:last-child) table.t1 td 
+.green .t1 td:not(:last-child) p > *:not(:last-child) table.t1 td 
+.red address address:not(:first-of-type) 
+.red address address:not(:last-of-type) 
+.red p:not(:only-child) div.testText > div > p 
+.green p:not(:only-child) div.testText > div > p 
+.red .t1 *:not(:only-of-type) 
+.green .t1 *:not(:only-of-type) 
+p p:not(:not(p)) 
+p blockquote > div p 
+p blockquote + div ~ p 
+p blockquote + div ~ p 
+p blockquote + div p 
+p blockquote + div p 
+p blockquote div > p 
+p blockquote ~ div + p 
+p blockquote ~ div + p 
+testa test|testa 
+div.myTest * div.myTest *|testA 
+*|testA |testA 
+p, q b|* 
+p, q b|* [test] 
+div.test * div.test *|* 
+div.green * div.test * div.test |* 
+div.green * div.test * div.test |* 
+*|p, *|q, *|r *|q *[a|title] 
+*|p, *|q, *|r *|q *[a|title] 
+*|p, *|q, *|r, *|s *|q, *|t *[a|title="foo"] *[a|title=footwo] 
+*|p, *|q, *|r, *|s *|q *[a|title="foo"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|foo~="bar"], *|*[|class~="bar"] *|*[html|class~="bar"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|foo~="bar"], *|*[html|class~="bar"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|foo|="bar"], *|*[html|lang|="en"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|foo|="bar"], *|*[html|lang|="en"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|title^="si on"], *|*[title^="si on"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|title^="si on"], *|*[title^="si on"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|title$="tait"], p[|title$="tait"] *|*[|title$="tait"], *|*[html|title$="tait"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|title$="tait"], *|*[html|title$="tait"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|title*="hanta"], p[|title*="hanta"] *|*[|title*="hanta"], *|*[html|title*="hanta"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[a|title*="hanta"], *|*[html|title*="hanta"] 
+*|p, *|q, *|r, *|s *|p, *|r, *|s *|*[*|title] 
+*|p, *|q, *|r, *|s *|p, *|r, *|s *|*[*|title] 
+*|p, *|q, *|r, *|s *|p, *|r, *|s *|*[*|title="si on chantait"] 
+*|p, *|q, *|r, *|s *|p, *|r, *|s *|*[*|title="si on chantait"] 
+*|p, *|q, *|r, *|s *|p, *|r, *|s *|*[*|class~="deux"], *|*[*|foo~="deux"] 
+*|p, *|q, *|r, *|s *|p, *|r, *|s *|*[*|class~="deux"], *|*[*|foo~="deux"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[*|lang|="en"], *|*[a|foo|="un-d"] 
+*|p, *|q, *|r, *|s *|p, *|r *|*[*|lang|="en"], *|*[a|foo|="un-d"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r, *|s *|*[*|title^="si on"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r, *|s *|*[*|title^="si on"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r, *|s *|*[*|title$="tait"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r, *|s *|*[*|title$="tait"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r, *|s *|*[*|title*="on ch"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r, *|s *|*[*|title*="on ch"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title="si on chantait"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title="si on chantait"] 
+*|p, *|address, *|q, *|r *|p, *|q *|*[|class~="foo"] 
+*|p, *|address, *|q, *|r *|p, *|q *|*[|class~="foo"] 
+*|p, *|address, *|q, *|r *|p, *|q *|*[|lang|="foo-bar"], *|*[|myattr|="tat-tut"] 
+*|p, *|address, *|q, *|r *|p, *|q *|*[|lang|="foo-bar"], *|*[|myattr|="tat-tut"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title^="si on"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title^="si on"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title$="tait"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title$="tait"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title*="on ch"] 
+*|p, *|q, *|r, *|s, *|t*|p, *|r *|*[|title*="on ch"] 
+*|p, *|l div.test * div.test *:not(a|p) 
+div.test *:not(*|div) div.test > *:not(*|p):not(*|div) div.stub > *:not(*|div) 
+div.stub > * div.stub > *:not(|p) div.stub > *|l > *:not(|p) 
+div.stub > *|* div.stub > *|*:not(a|*) div.stub v 
+div.stub > *|* div.stub > *|*:not(*|*) 
+div.stub > *|* div.stub > *|*:not(|*) 
+div.stub > *|* div.stub > *|*:not(|*) 
+*|p, *|q, *|r, *|s *|p, *|r, *|s div.stub *:not([a|title="foo"]) 
+*|p, *|q, *|r, *|s *|p, *|r, *|s div.stub *:not([a|title="foo"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|foo~="bar"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|foo~="bar"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|foo|="bar"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|foo|="bar"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|title^="si on"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|title^="si on"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|title$="tait"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|title$="tait"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|title*="hanta"]) 
+*|p, *|q, *|r, *|s *|q, *|s div.stub *|*:not([a|title*="hanta"]) 
+*|p, *|q, *|r, *|s *|q div.stub *|*:not([*|title]) 
+*|p, *|q, *|r, *|s *|q div.stub *|*:not([*|title]) 
+*|p, *|q, *|r, *|s *|q div.stub *|*:not([*|title="si on chantait"]) 
+*|p, *|q, *|r, *|s *|q div.stub *|*:not([*|title="si on chantait"]) 
+*|p, *|q, *|r, *|s *|p.deu, *|q div.stub html|*:not([*|class~="deux"]),
+div.stub *|*:not(html|*):not([*|foo~="deux"]) 
+*|p, *|q, *|r, *|s *|p.deu, *|q div.stub html|*:not([*|class~="deux"]),
+div.stub *|*:not(html|*):not([*|foo~="deux"]) 
+*|p, *|q, *|r, *|s *|p.foo, *|q, *|s div.stub html|*:not([*|lang|="en"]),
+div.stub *|*:not(html|*):not([a|foo|="un-d"]) 
+*|p, *|q, *|r, *|s *|p.foo, *|q, *|s div.stub html|*:not([*|lang|="en"]),
+div.stub *|*:not(html|*):not([a|foo|="un-d"]) 
+*|p, *|q, *|r, *|s, *|t*|p.red, *|q, *|t div.stub *|*:not([*|title^="si on"]) 
+*|p, *|q, *|r, *|s, *|t*|p.red, *|q, *|t div.stub *|*:not([*|title^="si on"]) 
+*|p, *|q, *|r, *|s, *|t*|p.red, *|q, *|t div.stub *|*:not([*|title$="tait"]) 
+*|p, *|q, *|r, *|s, *|t*|p.red, *|q, *|t div.stub *|*:not([*|title$="tait"]) 
+*|p, *|q, *|r, *|s, *|t*|p.red, *|q, *|t div.stub *|*:not([*|title*="on ch"]) 
+*|p, *|q, *|r, *|s, *|t*|p.red, *|q, *|t div.stub *|*:not([*|title*="on ch"]) 
+*|q, *|r *|q div.stub *|*:not([|title]) 
+*|q, *|r *|q div.stub *|*:not([|title]) 
+*|q, *|r, *|s, *|t*|q, *|s, *|t div.stub *|*:not([|title="si on chantait"]) 
+*|q, *|r, *|s, *|t*|q, *|s, *|t div.stub *|*:not([|title="si on chantait"]) 
+*|p, *|address, *|q, *|r *|address, *|r div.stub *|*:not([|class~="foo"]) 
+*|p, *|address, *|q, *|r *|address, *|r div.stub *|*:not([|class~="foo"]) 
+*|p, *|address, *|q, *|r *|address, *|r div.stub *|*:not([|lang|="foo-bar"]) 
+*|p, *|address, *|q, *|r *|address, *|r div.stub *|*:not([|lang|="foo-bar"]) 
+*|p, *|q, *|r, *|s, *|t*|q, *|s, *|t div.stub *|*:not([|title^="si on"]) 
+*|p, *|q, *|r, *|s, *|t*|q, *|s, *|t div.stub *|*:not([|title^="si on"]) 
+*|p, *|q, *|r, *|s, *|t*|q, *|s, *|t div.stub *|*:not([|title$="tait"]) 
+*|p, *|q, *|r, *|s, *|t*|q, *|s, *|t div.stub *|*:not([|title$="tait"]) 
+*|p, *|q, *|r, *|s, *|t*|q, *|s, *|t div.stub *|*:not([|title*="on ch"]) 
+*|p, *|q, *|r, *|s, *|t*|q, *|s, *|t div.stub *|*:not([|title*="on ch"]) 
+div :not(:enabled):not(:disabled) p 
+line   [type~=odd]   line:nth-of-type(odd)   [hidden] 
+line   [type~=odd]   line:nth-of-type(odd)   [hidden] 
+line   [type~=match]   line:nth-child(3n-1)   [hidden] 
+line   [type~=match]   line:nth-child(3n-1)   [hidden] 
+line   [type~=match]   line:nth-last-of-type(3n-1)   [hidden] 
+line   [type~=match]   line:nth-last-of-type(3n-1)   [hidden] 
+p  p:empty 
+address:empty  address  .text 
+address:empty  address  .text 
+address:empty  address  .text 
+address  address:empty  .text 
+address  address:empty  .text 
+address  address:empty  .text 
+p   p, 
+p   .5cm 
+p   .\5cm 
+p   .two\ words 
+p   .one.word 
+.one\.word   p 
+p   foo & address, p 
+foo & address, p   p 
+foo & address, p   p 
+p   [*=test] 
+p   [*|*=test] 
+::selection   :selection 
+p   p:subject
+p   p   *   p > *   p + *   p ~ * 
+:canvas   :viewport   :window   :menu   :table   :select   ::canvas   ::viewport   ::window   ::menu   ::table   ::select 
+td > div   td > div > span 
+.test > *   .test > div > ::selection   .test > div > :nth-child(even)::selection   .test > div > :empty::selection   .test > div *::selection 
+   .test span:first-child::selection 
+   .test span[id=b]::selection 
+   .test #b + * + * 
+   .test span[id=b] ~ ::selection 
+   .test span[id=b] + ::selection 
+   .test :not(#b):last-child::selection 
+   .test ::selection 
+   .test::selection 
+   .test::selection 
+   .test strong 
+.control ::selection   .control > div   .control > div > span   .control > div > span.a   .control > div > span.b   .control > div > span.c   .control > div > span.d   .control > div > span.green   .control > div > span.yellow   .control > div > span.blue 
+textarea   textarea:focus   textarea::selection   textarea:focus::selection 
+p   p:hover   p::selection   p:hover::selection 
+p:first-letter   p::first-letter 
+p::first-letter   p:first-letter 
+p:first-line   p::first-line 
+p::first-line   p:first-line 
+span:before   span::before 
+span::before   span:before 
+span:after   span::after 
+span::after   span:after 
+p  .fail 
+tests, tests *  testA[|attribute]  testB[|attribute="fail"]  testC[|attribute~="fail"]  testD[|attribute^="fail"]  testE[|attribute*="fail"]  testF[|attribute$="fail"]  testG[|attribute|="fail"] 
+tests, tests *  testA[|attribute]  testB[|attribute="fail"]  testC[|attribute~="fail"]  testD[|attribute^="fail"]  testE[|attribute*="fail"]  testF[|attribute$="fail"]  testG[|attribute|="fail"] 
+tests, tests *  testA[*|attribute]  testB[*|attribute="pass"]  testC[*|attribute~="pass"]  testD[*|attribute^="pass"]  testE[*|attribute*="pass"]  testF[*|attribute$="pass"]  testG[*|attribute|="pass"] 
+tests, tests *  testA[*|attribute]  testB[*|attribute="pass"]  testC[*|attribute~="pass"]  testD[*|attribute^="pass"]  testE[*|attribute*="pass"]  testF[*|attribute$="pass"]  testG[*|attribute|="pass"] 
+tests, tests *  testA[*|attribute="pass"]  testB[*|attribute="pass"] 
+tests, tests *  testA:not([*|attribute="pass"])  testB:not([*|attribute="pass"]) 
+p  .13 
+p  .\13 
+p  .\31 \33 
+p:selection 
+div  p::first-child 
+div  p:not(:first-line)  p:not(:after) 
+p   span:first-line   span::first-line 
+p   p:first-line   p::first-line 
+p   p:first-letter   p::first-letter 
+.cs  .cs P  .cs .a  .cs .span1 span  .cs .span2  .cs .span2 SPAN  .cs .span2 span  .ci  .ci P  .ci .a  .ci .span1 span  .ci .span2 SPAN 
+p foo\:bar 
+p ..test .foo..quux .bar. 
+#test    #test:not(:empty) 
+#test1    #test1:empty    #test2    #test2:empty 
+#test    #stub ~ div div + div > div 
+[test]    stub ~ [|attribute^=start]:not([|attribute~=mid])[|attribute*=dle][|attribute$=end] ~ t 
+#two:first-child    #three:last-child 
+input, span  input:indeterminate, input:indeterminate + span 
+input, span  input:checked, input:checked + span 
+input, span  input:not(:checked), input:not(:checked) + span 
+input, span  input:not(:indeterminate), input:not(:indeterminate) + span 
+input, span  input:indeterminate:checked, input:indeterminate:checked + span 
+input, span  input:not(:indeterminate):not(:checked), input:not(:indeterminate):not(:checked) + span 
+p[example=publicclass]
+p[example="public"]

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<!-- Provide a title.  This will be shown on the generated chart -->
+<title>Demo Test Suite</title>
+
+<script type="text/javascript" src="JSLitmus.js"></script>
+<script type="text/javascript">
+
+function doSomethingElse(){};
+var should = true;
+var fail = false;
+
+JSLitmus.test('function return', function(count) {
+	function doSomething(){
+		doSomethingElse();
+		if (false) return;
+		doSomethingElse();
+		if (true) return;
+		doSomethingElse();
+	};
+	
+	while (count--){
+		if (should) doSomething();
+	}
+});
+
+JSLitmus.test('label break', function(count) {
+	var should = true;
+	while (count--){
+		doSomething: if (should) {
+			doSomethingElse();
+			if (false) break doSomething;
+			doSomethingElse();
+			if (true) break doSomething;
+			doSomethingElse();
+		}
+	}
+});
+
+JSLitmus.test('nested ifs', function(count) {
+	var should = true;
+	while (count--){
+		if (should) {
+			doSomethingElse();
+			if (!false) {
+				doSomethingElse();
+				if (!true) {
+					doSomethingElse();
+				}
+			}
+		}
+	}
+});
+
+</script>
+</head>
+<body onload="JSLitmus.runAll(event);">
+<p>Compare various ways of aborting the rest of the operations</p>
+  <div id="test_element" style="overflow:hidden; width: 1px; height:1px;"></div>
+</body>
+</html>

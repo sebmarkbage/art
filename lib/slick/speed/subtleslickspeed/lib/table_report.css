@@ -1,0 +1,241 @@
+
+#report table{
+	table-layout:fixed;
+}
+#report table td{
+	margin:0;padding:0;
+	vertical-align: top;
+}
+
+#report td div.bgw{
+	background: #E4EBF9;
+	background: #0072AB;
+/*	color: #68B3D8;*/
+	
+/*    -moz-border-radius: 6px;*/
+    -webkit-border-radius: 6px;
+	overflow:hidden;
+	padding:1px 2px;
+	line-height: 16px;
+	
+	margin: 0 3px;
+}
+#report td div.bgw div{
+	white-space: nowrap;
+	background: #333;
+	color:#fff;
+	
+	background: #0072AB !important;
+	background: #fff !important;
+	color:#0072AB;
+	
+	font-size: 10px;
+/*	text-indent:0.5em;*/
+	
+/*    -moz-border-radius: 6px;*/
+    -webkit-border-radius: 6px;
+	overflow:visible;
+	
+	margin:0 auto;
+	text-align: center;
+}
+
+#report td strong{
+	padding: 0.25em;
+	white-space:nowrap;
+}
+#report td strong em{
+	font-weight:normal;
+}
+#report td .wrap{
+	position:relative;
+}
+#report td a.rerun{
+	float:right;
+	visibility:hidden;
+	_visibility:visible;
+	
+	color: #FB1A75;
+	-webkit-box-shadow: 0px 1px 5px #000;
+	
+/*	background:#E4EBF9;*/
+	margin:0;padding:0;
+	
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width:100%;
+	height:100%;
+	z-index: 100;
+	
+	text-align:center;
+	font-size:2em;
+	font-family: Garamond, serif;
+	text-decoration: none;
+	
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter:alpha(opacity=80);
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+	
+	-moz-border-radius: 9px;
+    -webkit-border-radius: 9px;
+	border:5px solid;
+	margin:-5px;
+}
+#report td:hover a.rerun{
+	visibility:visible;
+}
+
+td div.bgw div{
+	display:none;
+}
+#report-wrap.selector td div.bgw div.selector,
+#report-wrap.framework td div.bgw div.framework,
+#report-wrap.All td div.bgw div.All,
+#report-wrap.show_all td div.bgw div{
+	display:block !important;
+}
+
+
+.toolbar{
+	background:#eee;
+	padding: 1em 1.5em;
+}
+
+.toolbar label{
+	padding-left:0.5em;
+}
+
+.toolbar input.number{
+	text-align:right;
+}
+
+#report.hide_info td strong{
+	display:none;
+}
+
+/* @group Selector */
+#report-wrap.selector #report.hide_info tr:hover td strong{
+	display:inline;
+}
+
+#report-wrap.selector #report.hide_info tr td strong{
+/*	display:block;*/
+	font-size: 12px;
+	line-height: 18px;
+	margin:0;padding:0;
+	
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width:100%;
+	
+	color:#fff;
+	text-shadow: 0px 1px 1px #0072AB;
+}
+#report-wrap.selector #report.hide_info tr td strong.sec{
+	top:17px !important;
+}
+#report-wrap.selector #report.hide_info tr td strong.result{
+	top:34px !important;
+}
+#report-wrap.selector #report.hide_info tr:hover td div.bgw div{
+	background:#3A9CCC !important;
+	color:#3A9CCC;
+}
+
+#report-wrap.selector tr td{
+	text-align:center;
+}
+#report-wrap.selector tr td div.bgw{
+	margin:1px 0;
+	padding:0;
+	-moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
+#report-wrap.selector tr td div.bgw{
+	background: #E4EBF9;
+}
+/*#report-wrap.selector tr:first-child td,*/
+#report-wrap.selector tr td:first-child{
+	background:none;
+	color: #000;
+	padding-right:1em;
+	vertical-align: middle;
+}
+
+#report-wrap.selector tr td div.bgw{
+	background: #0072AB;
+	margin:6px 0;
+	padding: 0 1px;
+	height:2em;
+	font-size:2em;
+	position:relative;
+	border-top: 2px solid #0072AB !important;
+	border-bottom: 2px solid #0072AB !important;
+}
+#report-wrap.selector tr td div.bgw div{
+/*	opacity:1 !important;*/
+	width:99% !important;
+/*	height:3em !important;*/
+	line-height:2em;
+/*	overflow:hidden;*/
+	background: #fff !important;
+	color:#0072AB;
+	position: absolute;
+	bottom: 0px;
+	left: 1%;
+	-webkit-border-bottom-left-radius:0 !important;
+	-webkit-border-bottom-right-radius:0 !important;
+}
+#report-wrap tr:hover td div.bgw div{
+	opacity:1 !important;
+}
+
+/* @end   Selector */
+
+/* @group framework */
+
+#report-wrap.framework tr td:nth-child(odd) div.bgw{
+	background: #3A9CCC;
+}
+#report-wrap.framework tr td div.bgw{
+	font-size:1em !important;
+}
+#report-wrap.framework tr td div.bgw div{
+	font-size:1em !important;
+}
+
+/* @end   framework */
+
+/* @group All */
+
+#report-wrap.All tr td div.bgw{
+	background: #E4EBF9;
+	margin:2px;
+	font-size:1em !important;
+}
+#report-wrap.All tr td div.bgw div{
+	background: #67B0D3 !important;
+	margin:0;
+	color:#000;
+	font-size:1em !important;
+	text-align:left;
+	text-indent:0.25em;
+	opacity:1 !important;
+}
+
+/* @end   All */
+
+
+#report{
+	margin:2em 0;
+}
+#report td h3{
+	padding: 0 1em;
+	height: 2em;
+	line-height:1em;
+}
+
+

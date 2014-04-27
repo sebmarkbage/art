@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title> :: SlickSpec</title>
+
+<style type="text/css" media="screen">
+iframe{display:none;}
+</style>
+
+<!-- JSSpec -->
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpec.js"></script>
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpecHelpers.js"></script>
+
+<!-- Slick -->
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Parser.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Finder.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickThis = Slick;
+this.Slick = null;
+</script>
+
+<script> document.write('<scr'+'ipt src="../frameworks/slick.js?last&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickLast = Slick;
+this.Slick = null;
+</script>
+
+<!-- benchmarker -->
+<script src="JSLitmus.js" type="text/javascript" charset="utf-8"></script>
+<script src="JSLitmusHelpers.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Runner -->
+<script type="text/javascript" src="../../SlickSpec/assets/simple_request.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+var elements = context.document.getElementsByTagName('*');
+
+new Mock('', function(){
+	
+	spec ['nodeName.charAt'] = function(count){
+		var i, node, result=0;
+		while(count--){
+			for (i=0; node = elements[i++];) {
+				node.nodeName.charAt(0) == '/' && result++;
+			}
+		}
+		return result;
+	};
+	
+	spec ['nodeName.charCodeAt'] = function(count){
+		var i, node, result=0;
+		while(count--){
+			for (i=0; node = elements[i++];) {
+				node.nodeName.charCodeAt(0) == 47 && result++;
+			}
+		}
+		return result;
+	};
+	
+	spec ['nodeName.indexOf'] = function(count){
+		var i, node, result=0;
+		while(count--){
+			for (i=0; node = elements[i++];) {
+				node.nodeName.indexOf('/') !== -1 && result++;
+			}
+		}
+		return result;
+	};
+	
+/*
+	spec ['nodeName.split'] = function(count){
+		var i, node;
+		while(count--){
+			for (i=0; node = elements[i++];) {
+				node.nodeName.split('/').length > 1
+			}
+		}
+	};
+*/
+	
+});
+
+</script>
+</head>
+<body>
+
+<!-- mocks -->
+<iframe onload="Mock.register('template html quirks',this.contentWindow)" src="../../SlickSpec/mocks/template-quirks.html"></iframe>
+
+</body>
+</html>

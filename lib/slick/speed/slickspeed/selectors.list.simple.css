@@ -1,0 +1,105 @@
+#title
+h1#title
+div#title
+div #title
+a #title
+.company
+.copyright
+.described
+.dtd-example
+.example
+.figure
+.fn
+.head
+.index-inst
+.inner
+.meaning
+.note
+.profile
+.refs
+.selectorsReview
+.subtoc
+.title
+.toc
+.toc .tocline2
+.tocline2, .tocline3, .tocline4
+.tprofile
+.url
+.vcard
+.wrapper
+a
+a.inner
+.url.fn
+a.url.fn
+a[href^="http://"]
+a[href^=#]
+a[href=#]
+abbr
+abbr[title]
+abbr[title^="CSS"]
+acronym
+b
+br
+cite
+code
+dd
+dd.vcard
+dfn
+div
+div.example
+div.figure
+div.head
+div.note
+div.profile
+div.subtoc
+div.wrapper
+dl dt
+dl.refs
+dl dt
+dt
+em
+h2, h3, h4, h5
+hr
+.nest.a1 .flatInNest
+i.nest.a1 b.flatInNest
+img
+li
+li.tocline2
+li.tocline3
+li.tocline4
+ol
+p
+p.copyright
+p.note
+pre
+pre.dtd-example
+span
+span.company
+span.fn
+span.index-inst
+span.note
+strong
+sup
+table
+table.selectorsReview
+table.tprofile
+table .origin
+table .pattern
+table td.origin
+table td.pattern
+tbody
+td
+td.described
+td.meaning
+td.pattern, td.origin
+th
+th.described
+th.meaning
+table th.origin
+table th.pattern
+th.title
+thead
+tr
+ul
+ul.toc
+var

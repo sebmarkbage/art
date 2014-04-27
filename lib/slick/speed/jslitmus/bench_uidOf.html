@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<!-- Provide a title.  This will be shown on the generated chart -->
+<title>Demo Test Suite</title>
+
+<script type="text/javascript" src="JSLitmus.js"></script>
+<script type="text/javascript">
+
+(function(){
+	var local = {
+		uidx:0,
+		uidOf: function(node){
+			return node._slickUID || (node._slickUID = this.uidx++);
+		}
+	}
+	JSLitmus.test('_slickUID', function(count) {
+		while (count--){
+			local.uidOf(document.createElement('div'));
+		}
+	});
+})();
+
+(function(){
+	var local = {
+		uidx:0,
+		uidOf: function(node){
+			return node._slickUID || (node._slickUID = [this.uidx++])[0];
+		}
+	}
+	JSLitmus.test('_slickUID Array', function(count) {
+		while (count--){
+			local.uidOf(document.createElement('div'));
+		}
+	});
+})();
+
+(function(){
+	var local = {
+		uidx:0,
+		uidOf: function(node){
+			return node.uniqueID || (node.uniqueID = this.uidx++);
+		}
+	}
+	JSLitmus.test('uniqueID', function(count) {
+		while (count--){
+			local.uidOf(document.createElement('div'));
+		}
+	});
+})();
+
+(function(){
+	var local = {
+		uidx:0,
+		uidOf: function(node){
+			return node.uniqueNumber || (node.uniqueNumber = this.uidx++);
+		}
+	}
+	JSLitmus.test('uniqueNumber', function(count) {
+		while (count--){
+			local.uidOf(document.createElement('div'));
+		}
+	});
+})();
+
+
+
+(function(){
+	var uidx = 0;
+	JSLitmus.test('no FN _slickUID', function(count) {
+		var node;
+		while (count--){
+			node = document.createElement('div');
+			node._slickUID || (node._slickUID = uidx++);
+		}
+	});
+})();
+
+(function(){
+	var uidx = 0;
+	JSLitmus.test('no FN _slickUID Array', function(count) {
+		var node;
+		while (count--){
+			node = document.createElement('div');
+			node._slickUID || (node._slickUID = [uidx++])[0];
+		}
+	});
+})();
+
+(function(){
+	var uidx = 0;
+	JSLitmus.test('no FN uniqueID', function(count) {
+		var node;
+		while (count--){
+			node = document.createElement('div');
+			node.uniqueID || (node.uniqueID = uidx++);
+		}
+	});
+})();
+
+(function(){
+	var uidx = 0;
+	JSLitmus.test('no FN uniqueNumber', function(count) {
+		var node;
+		while (count--){
+			node = document.createElement('div');
+			node.uniqueNumber || (node.uniqueNumber = uidx++);
+		}
+	});
+})();
+
+
+</script>
+</head>
+<body onload="JSLitmus.runAll(event);">
+  <div id="test_element" style="overflow:hidden; width: 1px; height:1px;"></div>
+</body>
+</html>

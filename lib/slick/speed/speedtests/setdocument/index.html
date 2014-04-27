@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+		<title>setdocument</title>
+		<script type="text/javascript" src="../../benchmarkjs/benchmark.js"></script>
+		<script src="https://github.com/mootools/slick/raw/d3aef7cb747c127f2dd33a608769678ed4e7f9ef/Source/Slick.Parser.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://github.com/mootools/slick/raw/d3aef7cb747c127f2dd33a608769678ed4e7f9ef/Source/Slick.Finder.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			oldSlick = window.Slick;
+			Slick = null;
+		</script>
+		<script src="../../../Source/Slick.Parser.js" type="text/javascript"></script>
+		<script src="../../../Source/Slick.Finder.js" type="text/javascript"></script>
+		<script src="slow-document.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<applet code="nano" archive="../../benchmarkjs/nano.jar"></applet>
+		<script type="text/javascript">
+		
+			var suite = new Benchmark.Suite;
+			// add tests
+			suite
+			.add('Old Slick', function() {
+				oldSlick.search(document, 'div');
+				oldSlick.search(doc, 'div');
+			})
+			.add('Current Slick', function() {
+				Slick.search(document, 'div');
+				Slick.search(doc, 'div');
+			})
+			// add listeners
+			.on('cycle', function(bench) {
+				console.log(String(bench));
+			})
+			.on('complete', function() {
+				console.log('Fastest is ' + this.filter('fastest').pluck('name'));
+			})
+			.run(true);
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>Selection benchmarks</title>
+
+<style type="text/css" media="screen">
+</style>
+
+<!-- JSSpec -->
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpec.js"></script>
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpecHelpers.js"></script>
+<script type="text/javascript" charset="utf-8">
+window.scripts_to_get = [];
+</script>
+
+<!-- Slick -->
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Parser.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Finder.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickThis = Slick;
+this.Slick = null;
+</script>
+
+<script> document.write('<scr'+'ipt src="../frameworks/slick.js?last&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickLast = Slick;
+this.Slick = null;
+</script>
+
+<script src="../frameworks/nwmatcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../frameworks/sizzle.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="../frameworks/yass.css3.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="../frameworks/sly.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="../frameworks/domass.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="../frameworks/dojo-acme.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- benchmarker -->
+<script src="JSLitmus.js" type="text/javascript" charset="utf-8"></script>
+<script src="JSLitmusHelpers.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- benchmarks -->
+<script src="bench_select.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Runner -->
+<script type="text/javascript" src="../../SlickSpec/assets/simple_request.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+global.disableQSA = true;
+global.selectors = [];
+try{
+	global.selectors = global.selectors.concat(decodeURIComponent(document.location.search.replace(/\+/g,' ').match(/selectors=(.*?)(&|$)/)[1]).split(/\r?\n/));
+}catch(e){}
+if (global.selectors.length === 0)
+global.selectors = [
+
+	// TAG
+	'body'                        ,
+	'div'                         ,
+	'body div'                    ,
+	'div p'                       ,
+	
+	// ID
+	'#title'                      ,
+	'h1#title'                    ,
+	'div #title'                  ,
+	'* #title'                    ,
+
+	// CLASS
+	'.note'                       ,
+	'div.example'                 ,
+	'ul .tocline2'                ,
+	'div.example, div.note'       ,
+	'ul.toc li.tocline2'          ,
+	'ul.toc > li.tocline2'        ,
+
+	// ATTRIB
+	'div[class^=exa][class$=mple]',
+	'a[href][lang][class]'        ,
+	'div[class]'                  ,
+	'div[class=example]'          ,
+	'div[class^=exa]'             ,
+	'div[class$=mple]'            ,
+	'div[class*=e]'               ,
+	'div[class|=dialog]'          ,
+	'[id!=title]'                 ,
+	'[class!=example]'            ,
+	'div[class~=example]'         ,
+	
+	// PSEUDO
+	'div:not(.example)'           ,
+	'p:contains(selectors)'       ,
+	'p:nth-child(even)'           ,
+	'p:nth-child(2n)'             ,
+	'p:nth-child(odd)'            ,
+	'p:nth-child(2n+1)'           ,
+	'p:nth-child(n)'              ,
+	'p:only-child'                ,
+	'p:last-child'                ,
+	'p:first-child'               ,
+	
+	// COMBONATORS
+	'div > p'                     ,
+	'div + p'                     ,
+	'div ~ p'                     ,
+	'div p a'                     ,
+	
+	// MULTIPLE
+	'div, p, a'                   ,
+	
+	// COMPLEX
+	'h1#title + div > p'          ,
+	'h1[id]:contains(Selectors)'  ,
+
+
+	''
+];
+
+new Mock('', benchmarkSelectors);
+
+</script>
+<style type="text/css" media="screen">
+
+textarea{
+	width: 240px;
+	height: 160px;
+	font-family: consolas, monaco, monospace;
+	font-size: 10px;
+	line-height: 12px !important;
+}
+iframe.mock{
+	display:none;
+}
+
+.selector-list{
+	float:right;
+}
+hr{
+	clear: both;
+}
+
+</style>
+</head>
+<body>
+
+<div class="selector-list">
+	<ul>
+		<li><strong><a href="?">SlickSpeed Default Selectors</a></strong></li>
+		<li><strong><a href="?selectors=%23title%0D%0Ah1%23title%0D%0Adiv%23title%0D%0Adiv+%23title%0D%0Aa+%23title%0D%0A.company%0D%0A.copyright%0D%0A.described%0D%0A.dtd-example%0D%0A.example%0D%0A.figure%0D%0A.fn%0D%0A.head%0D%0A.index-inst%0D%0A.inner%0D%0A.meaning%0D%0A.note%0D%0A.profile%0D%0A.refs%0D%0A.selectorsReview%0D%0A.subtoc%0D%0A.title%0D%0A.toc%0D%0A.toc+.tocline2%0D%0A.tocline2%2C+.tocline3%2C+.tocline4%0D%0A.tprofile%0D%0A.url%0D%0A.vcard%0D%0A.wrapper%0D%0Aa%0D%0Aa.inner%0D%0A.url.fn%0D%0Aa.url.fn%0D%0Aa%5Bhref%5E%3D%22http%3A%2F%2F%22%5D%0D%0Aa%5Bhref%5E%3D%23%5D%0D%0Aa%5Bhref%3D%23%5D%0D%0Aabbr%0D%0Aabbr%5Btitle%5D%0D%0Aabbr%5Btitle%5E%3D%22CSS%22%5D%0D%0Aacronym%0D%0Ab%0D%0Abr%0D%0Acite%0D%0Acode%0D%0Add%0D%0Add.vcard%0D%0Adfn%0D%0Adiv%0D%0Adiv.example%0D%0Adiv.figure%0D%0Adiv.head%0D%0Adiv.note%0D%0Adiv.profile%0D%0Adiv.subtoc%0D%0Adiv.wrapper%0D%0Adl+dt%0D%0Adl.refs%0D%0Adl+dt%0D%0Adt%0D%0Aem%0D%0Ah2%2C+h3%2C+h4%2C+h5%0D%0Ahr%0D%0A.nest.a1+.flatInNest%0D%0Ai.nest.a1+b.flatInNest%0D%0Aimg%0D%0Ali%0D%0Ali.tocline2%0D%0Ali.tocline3%0D%0Ali.tocline4%0D%0Aol%0D%0Ap%0D%0Ap.copyright%0D%0Ap.note%0D%0Apre%0D%0Apre.dtd-example%0D%0Aspan%0D%0Aspan.company%0D%0Aspan.fn%0D%0Aspan.index-inst%0D%0Aspan.note%0D%0Astrong%0D%0Asup%0D%0Atable%0D%0Atable.selectorsReview%0D%0Atable.tprofile%0D%0Atable+.origin%0D%0Atable+.pattern%0D%0Atable+td.origin%0D%0Atable+td.pattern%0D%0Atbody%0D%0Atd%0D%0Atd.described%0D%0Atd.meaning%0D%0Atd.pattern%2C+td.origin%0D%0Ath%0D%0Ath.described%0D%0Ath.meaning%0D%0Atable+th.origin%0D%0Atable+th.pattern%0D%0Ath.title%0D%0Athead%0D%0Atr%0D%0Aul%0D%0Aul.toc%0D%0Avar%0D%0A">Simple Selectors</a></strong></li>
+	</ul>
+	<ul>
+		<li><a href="?selectors=body%2C+div%0D%0Abody+div%2C+div+p%0D%0A%23title%2C+h1%23title%0D%0Adiv+%23title%2C+*+%23title%0D%0A.note%2C+div.example%0D%0Aul+.tocline2%2C+div.example%2C+div.note%0D%0Aul.toc+li.tocline2%2C+ul.toc+%3E+li.tocline2%0D%0Adiv%5Bclass%5E%3Dexa%5D%5Bclass%24%3Dmple%5D%2C+a%5Bhref%5D%5Blang%5D%5Bclass%5D%0D%0Adiv%5Bclass%5D%2C+div%5Bclass%3Dexample%5D%0D%0Adiv%5Bclass%5E%3Dexa%5D%2C+div%5Bclass%24%3Dmple%5D%0D%0Adiv%5Bclass*%3De%5D%2C+div%5Bclass%7C%3Ddialog%5D%0D%0A%5Bid%21%3Dtitle%5D%2C+%5Bclass%21%3Dexample%5D%0D%0Adiv%5Bclass%7E%3Dexample%5D%2C+div%3Anot%28.example%29%0D%0Ap%3Acontains%28selectors%29%2C+p%3Anth-child%28even%29%0D%0Ap%3Anth-child%282n%29%2C+p%3Anth-child%28odd%29%0D%0Ap%3Anth-child%282n%2B1%29%2C+p%3Anth-child%28n%29%0D%0Ap%3Aonly-child%2C+p%3Alast-child%0D%0Ap%3Afirst-child%2C+div+%3E+p%0D%0Adiv+%2B+p%2C+div+%7E+p%0D%0Adiv+p+a%2C+div%2C+p%2C+a%0D%0Ah1%23title+%2B+div+%3E+p%2C+h1%5Bid%5D%3Acontains%28Selectors%29%0D%0A">Multiple Selectors</a></li>
+		<li><a href="?selectors=*%0D%0Ahtml%0D%0Abody%0D%0Adiv%0D%0Aa%0D%0Aflarm">Tags</a></li>
+		<li><a href="?selectors=%23title%0D%0Ah1%23title%0D%0Adiv+%23title%0D%0A*+%23title%0D%0A">IDs</a></li>
+		<li><a href="?selectors=.note%0D%0A.note.note%0D%0A.a1%0D%0A.a2%0D%0A.a3%0D%0A.a4%0D%0A.a5%0D%0A.a6%0D%0A">ClassNames</a></li>
+		<li><a href="?selectors=%5Bclass%5E%3Dexa%5D%5Bclass%24%3Dmple%5D%0D%0A%5Bhref%5D%5Blang%5D%5Bclass%5D%0D%0A%5Bclass%5D%0D%0A%5Bclass%3Dexample%5D%0D%0A%5Bclass%5E%3Dexa%5D%0D%0A%5Bclass%24%3Dmple%5D%0D%0A%5Bclass*%3De%5D%0D%0A%5Bclass%7C%3Ddialog%5D%0D%0A%5Bid%21%3Dtitle%5D%0D%0A%5Bclass%7E%3Dexample%5D%0D%0A">[attribs]</a></li>
+		<li><a href="?selectors=p%3Acontains%28selectors%29%0D%0A">:contains()</a></li>
+		<li><a href="?selectors=%3Anth-child%28even%29%0D%0A%3Anth-child%282n%29%0D%0A%3Anth-child%28odd%29%0D%0A%3Anth-child%282n%2B1%29%0D%0A%3Anth-child%28n%29%0D%0A">:nth-child()</a></li>
+		<li><a href="?selectors=div+%3E+p%0D%0Adiv+%2B+p%0D%0Adiv+%7E+p%0D%0Adiv+p+a%0D%0A">Combinators</a></li>
+		<li><a href="?selectors=p+%21%3E+div%0D%0Ap+%21%2B+div%0D%0Ap+%21%7E+div%0D%0Aa%21p%21div%0D%0A">Reverse Combonators</a></li>
+		<li><a href="?selectors=div%5Bclass%21%3Dmade_up%5D%0D%0Ap%5Bclass%21%3Dmade_up1%5D%0D%0Adiv%5Bclass%21%3Dmade_up2%5D%0D%0Ap%5Bclass%21%3Dmade_up3%5D%0D%0Adiv%5Bclass%21%3Dmade_up4%5D%0D%0Ap%5Bclass%21%3Dmade_up5%5D%0D%0Adiv%5Bclass%21%3Dmade_up6%5D%0D%0Ap%5Bclass%21%3Dmade_up7%5D%0D%0A">Custom Attrib Operators</a></li>
+	</ul>
+</div>
+<div>
+	<form action="" method="get">
+		<script type="text/javascript" charset="utf-8">
+
+document.write('<textarea name="selectors">');
+document.write(global.selectors.join("\n"));
+document.write('</textarea>');
+
+		</script>
+		<p><input type="submit" value="Update Selectors" /></p>
+	</form>
+</div>
+
+<!-- mocks -->
+<iframe class="mock" onload="Mock.register('',this.contentWindow)" src="../../SlickSpec/mocks/template-standard.html"></iframe>
+<!-- <iframe class="mock" onload="Mock.register('tmpl html std',this.contentWindow)" src="../../SlickSpec/mocks/template-standard.html"></iframe> -->
+<!-- <iframe onload="Mock.register('tmpl html almost std',this.contentWindow)" src="../../SlickSpec/mocks/template-almost.html"></iframe> -->
+<!-- <iframe onload="Mock.register('tmpl html quirks',this.contentWindow)" src="../../SlickSpec/mocks/template-quirks.html"></iframe> -->
+
+<!--[if gt IE 8]><!-->
+<!-- <iframe onload="Mock.register('tmpl xhtml',this.contentWindow)" src="../../SlickSpec/mocks/template.xhtml"></iframe> -->
+<!-- <iframe onload="Mock.register('tmpl xml',this.contentWindow)" src="../../SlickSpec/mocks/template.xml"></iframe> -->
+<!-- <iframe onload="Mock.register('svg logo',this.contentWindow)" src="../../SlickSpec/mocks/MooTools_Logo.svg"></iframe> -->
+<!-- <![endif]-->
+
+<!--[if gte IE 8]>
+<![endif]-->
+<!-- <iframe onload="Mock.register('tmpl html IE8 as IE7',this.contentWindow)" src="../../SlickSpec/mocks/template-ie7.html"></iframe> -->
+
+<script type="text/javascript" charset="utf-8">
+
+// new Mock.Request('responseXML','../../SlickSpec/mocks/xmlmock1.xml');
+// new Mock.Request('responseXML','../../SlickSpec/mocks/MooTools_Logo.svg');
+// document.getElementsByTagName('textarea')[0].style.height = global.selectors.length * 12 + 24 + 'px';
+</script>
+
+<hr />
+
+<h1> <strong>Slick Developer</strong> Benchmarks for pre-release <strong>Slick</strong> </h1>
+
+</body>
+</html>
