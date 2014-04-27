@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Benchmark prototype Method vs Object Property Fn</title>
+
+<script type="text/javascript" src="JSLitmus.js"></script>
+<script type="text/javascript">
+
+function method(){
+	return this[1] + this[2] == 3;
+}
+
+(function(){
+	
+	var Thing = function(){};
+	Thing.prototype[1] = 1;
+	Thing.prototype[2] = 2;
+	Thing.prototype.method = method;
+	var object = new Thing();
+	
+	JSLitmus.test('method', function(count) {
+		while (count--){
+			
+			object.method();
+			
+		}
+	});
+	
+})();
+
+(function(){
+	
+	var object = {
+		1:1,
+		2:2,
+		_method: method
+	}
+	
+	JSLitmus.test('with', function(count) {
+		while (count--){
+			
+			with (object) _method();
+			
+		}
+	});
+	
+})();
+
+(function(){
+	
+	var object = {
+		1:1,
+		2:2
+	}
+	
+	JSLitmus.test('fn apply', function(count) {
+		while (count--){
+			
+			method.apply(object);
+			
+		}
+	});
+	
+})();
+
+(function(){
+	
+	var object = {
+		1:1,
+		2:2
+	}
+	
+	JSLitmus.test('fn call', function(count) {
+		while (count--){
+			
+			method.call(object);
+			
+		}
+	});
+	
+})();
+
+(function(){
+	
+	var object = {
+		1:1,
+		2:2,
+		method: method
+	}
+	
+	JSLitmus.test('fn property', function(count) {
+		while (count--){
+			
+			object.method();
+			
+		}
+	});
+	
+})();
+
+</script>
+</head>
+<body>
+<h1>Benchmark prototype Method vs Object Property Fn</h1>
+  <div id="test_element" style="overflow:hidden; width: 1px; height:1px;"></div>
+</body>
+</html>

@@ -1,9 +1,9 @@
-var MODE = require('./src/modes/current');
-MODE.Rectangle = require('./src/shapes/rectangle');
-MODE.Pill = require('./src/shapes/pill');
-MODE.Ellipse = require('./src/shapes/ellipse');
-MODE.Wedge = require('./src/shapes/wedge');
-if (!MODE.Font) MODE.Font = require('./src/shapes/font');
-MODE.Transform = require('./src/core/transform');
-MODE.Color = require('./src/core/color');
+var MODE = require('./modes/current');
+MODE.Rectangle = require('./shapes/rectangle');
+MODE.Pill = require('./shapes/pill');
+MODE.Ellipse = require('./shapes/ellipse');
+MODE.Wedge = require('./shapes/wedge');
+if (!MODE.Font) MODE.Font = require('./shapes/font');
+MODE.Transform = require('./core/transform');
+MODE.Color = require('./core/color');
 module.exports = MODE;

@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>SubtleSlickSpeed</title>
+	<link rel="stylesheet" href="lib/screen.css" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="lib/table_report.css" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="lib/print.css" type="text/css" media="print" charset="utf-8" />
+	<!--[if IE]><link rel="stylesheet" href="lib/ie.css" type="text/css" media="screen" charset="utf-8" /><![endif]-->
+	<script src="lib/jslib.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtlesandbox.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtleslickspeed.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtleslickspeed.reports.js" type="text/javascript" charset="utf-8"></script>
+	<script src="lib/subtleslickspeed.reports.table.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+	
+		var report = new SubtleSlickSpeed.Report();
+		var runner = new SubtleSlickSpeed.Runner(SubtleSlickSpeed.Tests);
+		
+		WindowEvents.addEvents({
+			'load:tests': function(){
+				/* console.log('WindowEvents:load:tests:runner.run'); */
+				report.addTests(SubtleSlickSpeed.Tests);
+				
+				if (!Object.fromQueryString(document.location.search).STOP)
+				setTimeout(function(){
+					runner.run();
+				}, 250);
+			},
+			
+			'load': function(){
+				document.getElementById('report').appendChild(report.toElement());
+			}
+		});
+		WindowEvents.addEvent('load', function(){
+			/* console.log('WindowEvents:load:loadScript'); */
+			SubtleSandbox.loadScript('tests/selectors/tests.js');
+		});
+		
+	</script>
+	<style type="text/css" media="screen">
+		body{
+			padding:1em;
+		}
+		#log{
+			height:4em;
+			overflow:auto;
+		}
+	</style>
+</head>
+<body>
+
+
+<h1><ins>Subtle</ins>SlickSpeed <em>(alpha)</em> <input type="button" value="Run" accesskey="r" onclick="SubtleSlickSpeed.STOP = false; runner.run();" /> <input type="button" value="STOP" accesskey="s" onclick="SubtleSlickSpeed.STOP = true;" /></h1>
+
+<div id="report-wrap" class="selector">
+	<div class="toolbar">
+		Graph: 
+		
+		<script type="text/javascript" charset="utf-8">
+			function graphSwap(value){
+				document.getElementById('report-wrap').className = value;
+			};
+		</script>
+		
+		<!-- <label title="Show all graphs"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="show_all" /> All</label> -->
+		<label title="Caclulate graphs based on the results for everything"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="All" /> Global</label>
+		<label title="Caclulate graphs based on the results for that Selector only"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="selector" checked="checked" /> Selector</label>
+		<label title="Caclulate graphs based on the results for that Framework only"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="framework" /> Framework</label>
+		<label title="Hide all graphs"><input onclick="graphSwap(this.value);" type="radio" name="graph" value="" /> Hide</label>
+		
+	</div>
+	<div class="toolbar">
+		Info: 
+		
+		<script type="text/javascript" charset="utf-8">
+			function infoSwap(value){
+				document.getElementById('report').className = value;
+			};
+		</script>
+		
+		<label><input onclick="infoSwap(this.value);" type="radio" name="info" value="" /> Show</label>
+		<label><input onclick="infoSwap(this.value);" type="radio" name="info" value="hide_info" checked="checked" /> Hide</label>
+	</div>
+	<pre id="log" class="box">
+	</pre>
+	
+	<p>
+		Graph values are based on the averages of all the iterations and runs for each test.<br />
+		<strong>1x</strong> is average. <strong>1.5x</strong> is <em>.5</em> faster than average. <strong>0.5x</strong> would be <em>.5</em> slower than the average.
+	</p>
+	<p> Click a cell to rerun that test. The graph will automatically update to show the latest data. </p>
+	
+	<script type="text/javascript" charset="utf-8">
+		var q = Object.fromQueryString(document.location.search);
+		if (q.MIN_ITERS    ) SubtleSlickSpeed.Test.MIN_ITERS     = parseInt(q.MIN_ITERS     ,10);
+		if (q.MIN_ITER_TIME) SubtleSlickSpeed.Test.MIN_ITER_TIME = parseInt(q.MIN_ITER_TIME ,10);
+		if (q.MIN_RUNS     ) SubtleSlickSpeed.Test.MIN_RUNS      = parseInt(q.MIN_RUNS      ,10);
+		if (q.MIN_RUN_TIME ) SubtleSlickSpeed.Test.MIN_RUN_TIME  = parseInt(q.MIN_RUN_TIME  ,10);
+		
+		if (q.REPORT_TIMEOUT) SubtleSlickSpeed.Report.TIMEOUT  = parseInt(q.REPORT_TIMEOUT  ,10);
+		var disableQSA = false; if (q.disableQSA) disableQSA  = !!q.disableQSA;
+		var disableGBC = false; if (q.disableGBC) disableGBC  = !!q.disableGBC;
+		var SELECTORS = '';
+		if (q.SELECTORS) SELECTORS = q.SELECTORS;
+		var STOP = !!q.STOP;
+	</script>
+	
+	
+	
+	<div id="report" class="hide_info">
+	</div>
+	
+	
+	
+	<form action="" method="get" onsubmit="return confirm('Changing the minimum times could really freak out your browser. I assume you know what you\'re doing');">
+		Defaults:
+		<input type="reset" value="Cancel" />
+		<input type="submit" value="Update" />
+		<br />
+		
+		<div id="exclude" class="toolbar">
+		</div>
+		<div class="toolbar">
+			Disable Freatures (emulate other browsers): 
+			<script type="text/javascript" charset="utf-8">
+			document.write('<label>querySelectorAll<input type="checkbox" class="number" size="4" value="1" '+(disableQSA ? 'checked="checked"' : '')+' name="disableQSA" /> </label> ');
+			document.write('<label>getByClass      <input type="checkbox" class="number" size="4" value="1" '+(disableGBC ? 'checked="checked"' : '')+' name="disableGBC" /> </label> ');
+			document.write('<br /><label>Selectors<br /> <textarea name="SELECTORS" id="SELECTORS">'+String.escapeHTML(SELECTORS)+'</textarea></label> ');
+			</script>
+		</div>
+		<div class="toolbar">
+			<script type="text/javascript" charset="utf-8">
+			document.write(' | <label>Iterations     <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITERS     +'" name="MIN_ITERS" /> </label> ');
+			document.write('<label>Runs           <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUNS      +'" name="MIN_RUNS" /> </label> ');
+			document.write(' | <label>Iteration Time <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_ITER_TIME +'" name="MIN_ITER_TIME" /><em>ms</em> </label> ');
+			document.write('<label>Run Time       <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Test.MIN_RUN_TIME  +'" name="MIN_RUN_TIME" /><em>ms</em> </label> ');
+			document.write(' | <label>Stop Autorun <input type="checkbox" value="1" name="STOP" '+( STOP ? 'checked="checked"' : '' )+' /> </label> ');
+			document.write('<label>Report Timeout <input type="text" class="number" size="4" value="'+SubtleSlickSpeed.Report.TIMEOUT     +'" name="REPORT_TIMEOUT" /><em>ms</em> </label> ');
+			</script>
+		</div>
+	</form>
+	
+	<div class="toolbar">
+		<strong><a href="#debug">Debug</a></strong>
+		<strong><a href="#">Stop Debugging</a></strong>
+		<br />
+		<em>Beware, debug mode is extremely ugly :P</em>
+	</div>
+</div>
+
+<p class="small"> Copyright &copy; 2009 Thomas Aylott (<a href="http://SubtleGradient.com">SubtleGradient.com</a>) | MIT License | <a href="http://github.com/subtleGradient/subtleslickspeed/tree/master" title="subtleGradient's subtleslickspeed at master - GitHub">Fork SubtleSlickSpeed on GitHub</a> </p>
+<script type="text/javascript" src="http://cetrk.com/pages/scripts/0000/0269.js"> </script>
+</body>
+</html>

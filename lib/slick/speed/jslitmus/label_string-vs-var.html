@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<!-- Provide a title.  This will be shown on the generated chart -->
+<title>Demo Test Suite</title>
+
+<script type="text/javascript" src="JSLitmus.js"></script>
+<script type="text/javascript">
+
+function doSomethingElse(){};
+var obj = {};
+
+JSLitmus.test('string literals', function(count) {
+	while (count--){
+		obj['property1'];
+		obj['property2'];
+		obj['property3'];
+		obj['property4'];
+		obj['property5'];
+		obj['property11'];
+		obj['property12'];
+		obj['property13'];
+		obj['property14'];
+		obj['property15'];
+		obj['property21'];
+		obj['property22'];
+		obj['property23'];
+		obj['property24'];
+		obj['property25'];
+		obj['property31'];
+		obj['property32'];
+		obj['property33'];
+		obj['property34'];
+		obj['property35'];
+	}
+});
+
+var 
+property1 = 'property1',
+property2 = 'property2',
+property3 = 'property3',
+property4 = 'property4',
+property5 = 'property5';
+property11 = 'property11',
+property12 = 'property12',
+property13 = 'property13',
+property14 = 'property14',
+property15 = 'property15';
+property21 = 'property21',
+property22 = 'property22',
+property23 = 'property23',
+property24 = 'property24',
+property25 = 'property25';
+property31 = 'property31',
+property32 = 'property32',
+property33 = 'property33',
+property34 = 'property34',
+property35 = 'property35';
+
+JSLitmus.test('string vars', function(count) {
+	while (count--){
+		obj[property1];
+		obj[property2];
+		obj[property3];
+		obj[property4];
+		obj[property5];
+		obj[property11];
+		obj[property12];
+		obj[property13];
+		obj[property14];
+		obj[property15];
+		obj[property21];
+		obj[property22];
+		obj[property23];
+		obj[property24];
+		obj[property25];
+		obj[property31];
+		obj[property32];
+		obj[property33];
+		obj[property34];
+		obj[property35];
+	}
+});
+
+</script>
+</head>
+<body>
+<p>Compare various ways of aborting the rest of the operations</p>
+  <div id="test_element" style="overflow:hidden; width: 1px; height:1px;"></div>
+</body>
+</html>

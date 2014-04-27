@@ -1,5 +1,5 @@
-require('../../src/modes/script');
-var SVGParser = require('../../src/parsers/svg');
+require('../../modes/script');
+var SVGParser = require('../../parsers/svg');
 
 SVGParser.load('../svgviewer/testcase.svg', function(surface){
 	var result = document.createElement('textarea');

@@ -1,0 +1,54 @@
+.a1
+.a1 .a2
+div.a1 div.a2
+.a1 .a2 .a3 .a4 .a5 .a6
+.a2 .a4 .a6
+.a1 > .a2 > .a3
+#title
+h1#title
+div#title
+div #title
+blockquote #title
+div
+div p
+p
+div > p
+div + p
+div ~ p
+div[class^=exa][class$=mple]
+div p a
+div, p, a
+p em
+p a[href]
+h2 a[name]
+.note
+.example
+.dtd-example
+div.example
+ul .tocline2
+div.example, div.note
+dl dd.vcard
+ul.toc li.tocline2
+ul.toc > li.tocline2
+h1#title ~ p + a
+p ~ div > a
+h1[id]:contains(Selectors)
+a[href][lang][class]
+div[class]
+div[class=example]
+div[class^=exa]
+div[class$=mple]
+div[class*=e]
+div[class|=dialog]
+div[class!=made_up]
+div[class~=example]
+a[href^="#"]
+a[href^=#]
+a[href^='#']
+a:first-child
+a:last-child
+div:not(.example)
+div:not(:contains("Example"))
+a:not(div[class])
+p:contains(markup)
+p:contains(selectors)

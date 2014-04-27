@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title> :: SlickSpec</title>
+
+<style type="text/css" media="screen">
+iframe{display:none;}
+</style>
+
+<!-- JSSpec -->
+<script type="text/javascript" src="../../test/assets/JSSpec.js"></script>
+<script type="text/javascript" src="../../test/assets/JSSpecHelpers.js"></script>
+
+<!-- Slick -->
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Parser.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Finder.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickThis = Slick;
+this.Slick = null;
+</script>
+
+<script> document.write('<scr'+'ipt src="../frameworks/slick.js?last&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickLast = Slick;
+this.Slick = null;
+</script>
+
+<script type="text/javascript" src="../../test/assets/JSSpecHelpers_slick.js" charset="utf-8"></script>
+
+<!-- benchmarker -->
+<script src="JSLitmus.js" type="text/javascript" charset="utf-8"></script>
+<script src="JSLitmusHelpers.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Runner -->
+<script type="text/javascript" src="../../test/assets/simple_request.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+Slick.disableQSA = true;
+SlickLast.disableQSA = true;
+
+var local_collectionToArray1 = function(nodes){
+	var i = nodes.length, array = new Array(i);
+	while (i--) array[i] = nodes[i];
+	return array;
+};
+var local_collectionToArray2 = function(nodes) {
+	var i = 0, element, array = [];
+	while ((element = nodes[i++])) array[i] = element;
+	return array;
+};
+var local_collectionToArray3 = function(nodes) {
+	for (var i = 0, element, array = []; element = nodes[i++];) array[i] = element;
+	return array;
+};
+
+var elements = context.document.getElementsByTagName('*');
+
+new Mock('', function(){
+	
+	spec ['local_collectionToArray1'] = function(count){
+		while(count--){
+			local_collectionToArray1(elements);
+		}
+	};
+	
+	spec ['local_collectionToArray2'] = function(count){
+		while(count--){
+			local_collectionToArray2(elements);
+		}
+	};
+	
+	spec ['local_collectionToArray3'] = function(count){
+		while(count--){
+			local_collectionToArray3(elements);
+		}
+	};
+	
+});
+
+</script>
+</head>
+<body>
+
+<!-- mocks -->
+<iframe onload="Mock.register('template html quirks',this.contentWindow)" src="../../test/tools/template-quirks.html"></iframe>
+
+</body>
+</html>

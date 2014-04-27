@@ -1,6 +1,6 @@
 require('../mode');
 var ART = require('../../index');
-var Morph = require('../../src/morph/path');
+var Morph = require('../../morph/path');
 
 
 var canvas = ART.Surface(1000, 1000);

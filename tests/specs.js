@@ -1178,7 +1178,8 @@ exports.sets = {
 
 };
 
-exports.unsupportedFeatures = [
+exports.unsupportedFeatures = [];
+exports.unsupportedFeaturesDisabled = [
 	// Temporarily disable specs requires unsupported features
 	'Clipping',
 	'color-prof-01-f',

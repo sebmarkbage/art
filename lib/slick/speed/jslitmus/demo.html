@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<!-- Provide a title.  This will be shown on the generated chart -->
+<title>Demo Test Suite</title>
+
+<script type="text/javascript" src="JSLitmus.js"></script>
+<script type="text/javascript">
+// The empty form of a non-looping test.  This should result in "Infinity"
+// operations per second, or very close to it.
+JSLitmus.test('empty test (non-looping)', function() {});
+
+// The empty form of a looping test.  This should also result in "Infinity"
+// operations per second, or very close to it.
+JSLitmus.test('empty test', function(count) {
+  while (count--);
+});
+
+// Test how much overhead there is in invoking a function
+var emptyFunction = function() {};
+JSLitmus.test('function overhead (non-looping)', function() {
+  emptyFunction();
+});
+
+// Test function invocation using a looping test.  This will be a bit faster
+// both becasue it's a looping function, and because 'f' is local to the test
+// function.
+JSLitmus.test('function overhead', function(count) {
+  var f = emptyFunction;
+  while (count--) f();
+});
+
+// Test Array.join() method so we can see how it compares to the "+"
+// operator
+JSLitmus.test('"hello" + "world" (non-looping)', function() {
+  var a = "hello", b = "world", x;
+  x = a+b;
+});
+
+// Test Array.join() method so we can see how it compares to the "+"
+// operator
+JSLitmus.test('"hello" + "world"', function(count) {
+  var a = "hello", b = "world", x;
+  while(count--) x = a+b;
+});
+
+// Test Array.join() method so we can see how it compares to the "+"
+// operator
+JSLitmus.test('string join()', function(count) {
+  var a = ['hello', 'world'];
+  while (count--) a.join();
+});
+
+// Is Math.random() fast or slow?
+JSLitmus.test('Math.random()', function(count) {
+  while (count--) Math.random();
+});
+
+// How fast is a simple regex test()? Let's find out...
+JSLitmus.test('RegExp.test()', function(count) {
+  while (count--) /rl/.test('hello world');
+});
+
+// Hmm... does caching the regex out side of the iteration help?
+JSLitmus.test('cached RegExp.test()', function(count) {
+  var re = /rl/;
+  while (count--) re.test('hello world');
+});
+
+// What about Date creation?  Is that fast or slow?
+JSLitmus.test('new Date()', function(count) {
+  while (count--) new Date();
+});
+
+// What if we set innerHTML to a Date?  Since this operation is pretty slow
+// there's no need to implement this as a looping test.
+JSLitmus.test('set Element.innerHTML', function() {
+  document.getElementById('test_element').innerHTML = new Date();
+});
+
+// Test Array creation, so we can compare to other operations
+JSLitmus.test('new Array()', function(count) {
+  while (count--) {var a = [];}
+});
+
+
+</script>
+</head>
+
+<body>
+  <p>A simple demo showing how JSLitmus can be used to test the performance of some core JavaScript features. View source to see fully commented code.</p>
+  <div id="test_element" style="overflow:hidden; width: 1px; height:1px;"></div>
+</body>
+</html>

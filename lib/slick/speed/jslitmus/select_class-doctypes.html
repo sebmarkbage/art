@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title> :: SlickSpec</title>
+
+<style type="text/css" media="screen">
+iframe{display:none;}
+</style>
+
+<!-- JSSpec -->
+<script type="text/javascript" src="../../test/assets/JSSpec.js"></script>
+<script type="text/javascript" src="../../test/assets/JSSpecHelpers.js"></script>
+
+<!-- Slick -->
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Parser.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Finder.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickThis = Slick;
+this.Slick = null;
+</script>
+
+<script> document.write('<scr'+'ipt src="../frameworks/slick.js?last&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickLast = Slick;
+this.Slick = null;
+</script>
+
+<!-- benchmarker -->
+<script src="JSLitmus.js" type="text/javascript" charset="utf-8"></script>
+<script src="JSLitmusHelpers.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Runner -->
+<script type="text/javascript" src="../../test/assets/simple_request.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+Slick.disableQSA = true;
+SlickLast.disableQSA = true;
+
+new Mock(/\b(xml|svg|xhtml|html)\b/i, function(){
+	
+	// it['nothing'] = function(count){
+	// 	var Slick = global.SlickThis;
+	// 	var document = context.document;
+	// 	var i=0, node;
+	// 	var elements = Slick(document,'*');
+	// 	var result;
+	// 	
+	// 	while(count--){
+	// 		Slick(document,'*');
+	// 		//for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 	}
+	// };
+	
+	// it['Slick this'] = function(count){
+	// 	var Slick = global.SlickThis;
+	// 	var document = context.document;
+	// 	var i=0, node;
+	// 	var elements = Slick(document,'*');
+	// 	var result;
+	// 	
+	// 	while(count--){
+	// 		/*elements = */Slick(document,'.note'                       );//for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'div.example'                 );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'ul .tocline2'                );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'div.example, div.note'       );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'ul.toc li.tocline2'          );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'ul.toc > li.tocline2'        );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'div:not(.example)'           );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 	}
+	// };
+	
+// });
+// new Mock(/\b(xml|svg|xhtml|html)\b/i, function(){
+	
+	// it['Slick LAST'] = function(count){
+	// 	var Slick = global.SlickLast;
+	// 	var document = context.document;
+	// 	var i=0, node;
+	// 	var elements = Slick(document,'*');
+	// 	var result;
+	// 	
+	// 	while(count--){
+	// 		/*elements = */Slick(document,'.note'                       );//for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'div.example'                 );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'ul .tocline2'                );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'div.example, div.note'       );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'ul.toc li.tocline2'          );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'ul.toc > li.tocline2'        );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 		// /*elements = */Slick(document,'div:not(.example)'           );for (i=0; node = elements[i++];) { node._slickUID = null; };
+	// 	}
+	// };
+	var selectors = "\n\
+.note\n\
+div.example\n\
+ul .tocline2\n\
+div.example, div.note\n\
+ul.toc li.tocline2\n\
+ul.toc > li.tocline2\n\
+div:not(.example)\n\
+".split("\n");
+	
+	for (var i = selectors.length - 1; i >= 0; i--){
+		if (!selectors[i]) continue;
+		
+		it['THIS '+selectors[i]] = function(count){
+			var Slick=global.SlickThis;var document=context.document;var i=0,node;
+			while(count--){
+				Slick(document,selectors[i]);
+			}
+		};
+		it['LAST '+selectors[i]] = function(count){
+			var Slick=global.SlickLast;var document=context.document;var i=0,node;		
+			while(count--){
+				Slick(document,selectors[i]);
+			}
+		};
+		
+	}
+	
+});
+
+</script>
+</head>
+<body>
+
+
+<!-- mocks -->
+<iframe onload="Mock.register('template html standard',this.contentWindow)" src="../../test/tools/template-standard.html"></iframe>
+<iframe onload="Mock.register('template html almost standard',this.contentWindow)" src="../../test/tools/template-almost.html"></iframe>
+<iframe onload="Mock.register('template html quirks',this.contentWindow)" src="../../test/tools/template-quirks.html"></iframe>
+
+<!--[if gt IE 8]><!-->
+<iframe onload="Mock.register('template xhtml',this.contentWindow)" src="../../test/tools/template.xhtml"></iframe>
+<iframe onload="Mock.register('template xml',this.contentWindow)" src="../../test/tools/template.xml"></iframe>
+<!-- <iframe onload="Mock.register('svg logo',this.contentWindow)" src="../../test/tools/MooTools_Logo.svg"></iframe> -->
+<!-- <![endif]-->
+
+<!--[if gte IE 8]>
+<iframe onload="Mock.register('template html IE8 as IE7',this.contentWindow)" src="../../test/tools/template-ie7.html"></iframe>
+<![endif]-->
+
+<script type="text/javascript" charset="utf-8">
+
+new Mock.Request('responseXML','../../test/tools/template.xml');
+new Mock.Request('responseXML','../../test/tools/template.xhtml');
+
+</script>
+</body>
+</html>

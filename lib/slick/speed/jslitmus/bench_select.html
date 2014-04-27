@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>Selection benchmarks</title>
+
+<style type="text/css" media="screen">
+</style>
+
+<!-- JSSpec -->
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpec.js"></script>
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpecHelpers.js"></script>
+
+<!-- Slick -->
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Parser.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Finder.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+global.SlickThis = Slick;
+Slick = null;
+</script>
+
+<script> document.write('<scr'+'ipt src="../frameworks/slick.js?last&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+global.SlickLast = Slick;
+Slick = null;
+</script>
+<script src="../frameworks/nwmatcher.js" type="text/javascript" charset="utf-8"></script>
+<script src="../frameworks/sizzle.js" type="text/javascript" charset="utf-8"></script>
+<script src="../frameworks/yass.css3.js" type="text/javascript" charset="utf-8"></script>
+<script src="../frameworks/sly.js" type="text/javascript" charset="utf-8"></script>
+<script src="../frameworks/domass.js" type="text/javascript" charset="utf-8"></script>
+<script src="../frameworks/dojo-acme.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpecHelpers_slick.js" charset="utf-8"></script>
+
+<!-- benchmarker -->
+<script src="JSLitmus.js" type="text/javascript" charset="utf-8"></script>
+<script src="JSLitmusHelpers.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- benchmarks -->
+<script src="bench_select2.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Runner -->
+<script type="text/javascript" src="../../SlickSpec/assets/simple_request.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+global.disableQSA = true;
+global.selectors = [];
+try{
+	global.selectors = global.selectors.concat(decodeURIComponent(document.location.search.replace(/\+/g,' ').match(/selectors=(.*?)(&|$)/)[1]).split(/\r?\n/));
+}catch(e){}
+if (global.selectors.length === 0)
+global.selectors = [
+
+	// TAG
+	// 'body'                        ,
+	// 'div'                         ,
+	// 'body div'                    ,
+	// 'div p'                       ,
+	// 
+	// // ID
+	// '#title'                      ,
+	// 'h1#title'                    ,
+	// 'div #title'                  ,
+	// '* #title'                    ,
+	// 
+	// // CLASS
+	// '.note'                       ,
+	// 'div.example'                 ,
+	// 'ul .tocline2'                ,
+	// 'div.example, div.note'       ,
+	// 'ul.toc li.tocline2'          ,
+	// 'ul.toc > li.tocline2'        ,
+	// 
+	// // ATTRIB
+	// 'div[class^=exa][class$=mple]',
+	// 'a[href][lang][class]'        ,
+	// 'div[class]'                  ,
+	// 'div[class=example]'          ,
+	// 'div[class^=exa]'             ,
+	// 'div[class$=mple]'            ,
+	// 'div[class*=e]'               ,
+	// 'div[class|=dialog]'          ,
+	// '[id!=title]'                 ,
+	// '[class!=example]'            ,
+	// 'div[class~=example]'         ,
+	// 
+	// // PSEUDO
+	// 'div:not(.example)'           ,
+	// 'p:contains(selectors)'       ,
+	// 'p:nth-child(even)'           ,
+	// 'p:nth-child(2n)'             ,
+	// 'p:nth-child(odd)'            ,
+	// 'p:nth-child(2n+1)'           ,
+	// 'p:nth-child(n)'              ,
+	// 'p:only-child'                ,
+	// 'p:last-child'                ,
+	// 'p:first-child'               ,
+	// 
+	// // COMBONATORS
+	// 'div > p'                     ,
+	// 'div + p'                     ,
+	// 'div ~ p'                     ,
+	// 'div p a'                     ,
+	// 
+	// // MULTIPLE
+	// 'div, p, a'                   ,
+	// 
+	// // COMPLEX
+	'h1#title + div > p'          ,
+	// 'h1[id]:contains(Selectors)'  ,
+
+
+	''
+];
+
+new Mock(/\b(html)\b/i, benchmarkSelectors);
+
+</script>
+<style type="text/css" media="screen">
+
+textarea{
+	width: 240px;
+	height: 160px;
+	font-family: consolas, monaco, monospace;
+	font-size: 10px;
+	line-height: 12px !important;
+}
+iframe.mock{
+	display:none;
+}
+
+.selector-list{
+	float:right;
+}
+hr{
+	clear: both;
+}
+
+</style>
+</head>
+<body>
+
+<div class="selector-list">
+	<ul>
+		<li><strong><a href="?">Reset</a></strong></li>
+		<li><a href="?selectors=*%0D%0Ahtml%0D%0Abody%0D%0Adiv%0D%0Aa%0D%0Aflarm">Tags</a></li>
+		<li><a href="?selectors=%23title%0D%0Ah1%23title%0D%0Adiv+%23title%0D%0A*+%23title%0D%0A">IDs</a></li>
+		<li><a href="?selectors=.note%0D%0A.note.note%0D%0A.a1%0D%0A.a2%0D%0A.a3%0D%0A.a4%0D%0A.a5%0D%0A.a6%0D%0A">ClassNames</a></li>
+		<li><a href="?selectors=div%5Bclass%5E%3Dexa%5D%5Bclass%24%3Dmple%5D%0D%0Aa%5Bhref%5D%5Blang%5D%5Bclass%5D%0D%0Adiv%5Bclass%5D%0D%0Adiv%5Bclass%3Dexample%5D%0D%0Adiv%5Bclass%5E%3Dexa%5D%0D%0Adiv%5Bclass%24%3Dmple%5D%0D%0Adiv%5Bclass*%3De%5D%0D%0Adiv%5Bclass%7C%3Ddialog%5D%0D%0A%5Bid%21%3Dtitle%5D%0D%0Adiv%5Bclass%7E%3Dexample%5D%0D%0A">[attribs]</a></li>
+		<li><a href="?selectors=p%3Acontains%28selectors%29%0D%0A">:contains()</a></li>
+		<li><a href="?selectors=%3Anth-child%28even%29%0D%0A%3Anth-child%282n%29%0D%0A%3Anth-child%28odd%29%0D%0A%3Anth-child%282n%2B1%29%0D%0A%3Anth-child%28n%29%0D%0A">:nth-child()</a></li>
+		<li><a href="?selectors=div+%3E+p%0D%0Adiv+%2B+p%0D%0Adiv+%7E+p%0D%0Adiv+p+a%0D%0A">Combonators</li>
+		<li><a href="?selectors=p+%21%3E+div%0D%0Ap+%21%2B+div%0D%0Ap+%21%7E+div%0D%0Aa%21p%21div%0D%0A">Reverse Combonators</a></li>
+		<li><a href="?selectors=div%5Bclass%21%3Dmade_up%5D%0D%0Ap%5Bclass%21%3Dmade_up1%5D%0D%0Adiv%5Bclass%21%3Dmade_up2%5D%0D%0Ap%5Bclass%21%3Dmade_up3%5D%0D%0Adiv%5Bclass%21%3Dmade_up4%5D%0D%0Ap%5Bclass%21%3Dmade_up5%5D%0D%0Adiv%5Bclass%21%3Dmade_up6%5D%0D%0Ap%5Bclass%21%3Dmade_up7%5D%0D%0A">Custom Attrib Operators</a></li>
+	</ul>
+</div>
+<div>
+	<form action="" method="get">
+		<script type="text/javascript" charset="utf-8">
+
+document.write('<textarea name="selectors">');
+document.write(global.selectors.join("\n"));
+document.write('</textarea>');
+
+		</script>
+		<p><input type="submit" value="Update Selectors" /></p>
+	</form>
+</div>
+
+<!-- mocks -->
+<iframe class="mock" onload="Mock.register('tmpl html std',this.contentWindow)" src="../../SlickSpec/mocks/template-standard.html"></iframe>
+<!-- <iframe onload="Mock.register('tmpl html almost std',this.contentWindow)" src="../../SlickSpec/mocks/template-almost.html"></iframe> -->
+<!-- <iframe onload="Mock.register('tmpl html quirks',this.contentWindow)" src="../../SlickSpec/mocks/template-quirks.html"></iframe> -->
+
+<!--[if gt IE 8]><!-->
+<!-- <iframe onload="Mock.register('tmpl xhtml',this.contentWindow)" src="../../SlickSpec/mocks/template.xhtml"></iframe> -->
+<!-- <iframe onload="Mock.register('tmpl xml',this.contentWindow)" src="../../SlickSpec/mocks/template.xml"></iframe> -->
+<!-- <iframe onload="Mock.register('svg logo',this.contentWindow)" src="../../SlickSpec/mocks/MooTools_Logo.svg"></iframe> -->
+<!-- <![endif]-->
+
+<!--[if gte IE 8]>
+<![endif]-->
+<!-- <iframe onload="Mock.register('tmpl html IE8 as IE7',this.contentWindow)" src="../../SlickSpec/mocks/template-ie7.html"></iframe> -->
+
+<script type="text/javascript" charset="utf-8">
+
+// new Mock.Request('responseXML','../../test/tools/xmlmock1.xml');
+// new Mock.Request('responseXML','../../test/tools/MooTools_Logo.svg');
+// document.getElementsByTagName('textarea')[0].style.height = global.selectors.length * 12 + 24 + 'px';
+</script>
+
+<hr />
+
+<h1> <strong>Slick Developer</strong> Benchmarks for pre-release <strong>Slick</strong> </h1>
+
+</body>
+</html>

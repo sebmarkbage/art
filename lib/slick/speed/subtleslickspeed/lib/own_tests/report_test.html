@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>report_test.html</title>
+<script src="jslib.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+var SubtleSlickSpeed = {};
+</script>
+<script src="../subtleslickspeed.reports.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+
+SubtleSlickSpeed.Report.prototype.buildWrapperElement = function(){
+	console.log('SubtleSlickSpeed.Report.prototype.buildWrapperElement');
+	return document.createElement('div');
+};
+
+
+var mySubtleSlickSpeedReport;
+WindowEvents.addEvent('load',function(){
+	console.log('loaded');
+	
+	var DemoTest = function(id){
+		// console.log('DemoTest');
+		this.id = id;
+	};
+	DemoTest.prototype = Object.merge(
+		Events,
+		{
+			doit: function(){
+				var results = {
+					id: this.id,
+					start:[new Date()],
+					end:[new Date()]
+				};
+				this.fireEvent('complete', results);
+			}
+		}
+	);
+	
+	var tests = {
+		myTest1: new DemoTest('myTest1'),
+		myTest2: new DemoTest('myTest2'),
+		myTest3: new DemoTest('myTest3')
+	};
+	
+	mySubtleSlickSpeedReport = new SubtleSlickSpeed.Report(tests);
+	document.body.appendChild(mySubtleSlickSpeedReport.toElement());
+	
+	tests['myTest1'].doit();
+	tests['myTest2'].doit();
+	tests['myTest3'].doit();
+	tests['myTest1'].doit();
+	tests['myTest2'].doit();
+	tests['myTest3'].doit();
+});
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

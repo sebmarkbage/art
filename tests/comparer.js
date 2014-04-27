@@ -1,5 +1,5 @@
-var CanvasMode = require('../src/modes/canvas');
-var SVGParser = require('../src/parsers/svg');
+var CanvasMode = require('../modes/canvas');
+var SVGParser = require('../parsers/svg');
 var svgToCanvas = new SVGParser(CanvasMode);
 
 var canvas = document.createElement('canvas');

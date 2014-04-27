@@ -1,0 +1,37 @@
+.a1 .a2 .a3 .a4 .a5 .a6
+.a2 .a4 .a6
+.a1>.a2>.a3>.a4>.a5>.a6
+body #title
+body h1#title
+body div#title
+body div #title
+body blockquote #title
+body div
+body div p
+body p
+body div > p
+body div + p
+body div ~ p
+body div[class^=exa][class$=mple]
+body div p a
+body div, p, a
+body .note
+body div.example
+body ul .tocline2
+body div.example, div.note
+body ul.toc li.tocline2
+body ul.toc > li.tocline2
+body h1#title + div > p
+body h1[id]:contains(Selectors)
+body a[href][lang][class]
+body div[class]
+body div[class=example]
+body div[class^=exa]
+body div[class$=mple]
+body div[class*=e]
+body div[class|=dialog]
+body div[class!=made_up]
+body div[class~=example]
+body div:not(.example)
+body p:contains(markup)
+body p:contains(selectors)

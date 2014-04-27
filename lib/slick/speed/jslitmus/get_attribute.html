@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title> :: SlickSpec</title>
+
+<style type="text/css" media="screen">
+iframe{display:none;}
+</style>
+
+<!-- JSSpec -->
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpec.js"></script>
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpecHelpers.js"></script>
+
+<!-- Slick -->
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Parser.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script> document.write('<scr'+'ipt src="../../Source/Slick.Finder.js?this&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickThis = Slick;
+this.Slick = null;
+</script>
+
+<script> document.write('<scr'+'ipt src="../frameworks/slick.js?last&'+Math.random().toString(32).slice(2)+'" type="text/javascript"><\/scr'+'ipt>');</script>
+<script type="text/javascript">
+var SlickLast = Slick;
+this.Slick = null;
+</script>
+
+<script type="text/javascript" src="../../SlickSpec/assets/JSSpecHelpers.js" charset="utf-8"></script>
+
+<!-- benchmarker -->
+<script src="JSLitmus.js" type="text/javascript" charset="utf-8"></script>
+<script src="JSLitmusHelpers.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Runner -->
+<script type="text/javascript" src="../../SlickSpec/assets/simple_request.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+Slick.disableQSA = true;
+SlickLast.disableQSA = true;
+
+var local_getAttribute1 = function(node){
+	return ('className' in node) ? node.className : node.getAttribute('class');
+};
+var local_getAttribute2 = function(node) {
+	return node.className || node.getAttribute('class');
+};
+
+var element = context.document.getElementsByTagName('*')[2];
+
+new Mock('', function(){
+	
+	spec ['local_getAttribute1'] = function(count){
+		while(count--){
+			local_getAttribute1(element);
+		}
+	};
+	
+	spec ['local_getAttribute2'] = function(count){
+		while(count--){
+			local_getAttribute2(element);
+		}
+	};
+
+});
+
+</script>
+</head>
+<body>
+
+<!-- mocks -->
+<iframe onload="Mock.register('template html quirks',this.contentWindow)" src="../../SlickSpec/mocks/template-quirks.html"></iframe>
+
+</body>
+</html>

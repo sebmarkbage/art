@@ -1,5 +1,5 @@
 require('../mode');
-var SVGParser = require('../../src/parsers/svg');
+var SVGParser = require('../../parsers/svg');
 
 SVGParser.load('testcase.svg', function(surface){
 	surface.inject(document.body);

@@ -1,8 +1,8 @@
 var otherModes = [
-	require('../../src/modes/vml'),
-	require('../../src/modes/svg'),
-//	require('../../src/modes/script'),
-	require('../../src/modes/canvas')
+	require('../../modes/vml'),
+	require('../../modes/svg'),
+//	require('../../modes/script'),
+	require('../../modes/canvas')
 ];
 var ART = require('../../index');
 

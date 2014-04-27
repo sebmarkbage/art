@@ -1,7 +1,7 @@
 ﻿require('../mode');
 var ART = require('../../index');
-var MetricsPath = require('../../src/metrics/path');
-var SVGPath = require('../../src/modes/svg/path');
+var MetricsPath = require('../../metrics/path');
+var SVGPath = require('../../modes/svg/path');
 
 var art = new ART.Surface(1000, 600);
 

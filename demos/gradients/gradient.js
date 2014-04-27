@@ -1,7 +1,7 @@
 require('../mode');
 require('../fonts/moderna');
 var ART = require('../../index');
-var MetricsPath = require('../../src/metrics/path');
+var MetricsPath = require('../../metrics/path');
 
 //addEvent('domready', function(){
 
