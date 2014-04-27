@@ -3,10 +3,10 @@
 	url = https://github.com/subtleGradient/Sheet.js.git
 [submodule "lib/link"]
 	path = lib/link
-	url = https://github.com/sebmarkbage/link.js
+	url = https://github.com/sudodoki/link.js
 [submodule "lib/slick"]
 	path = lib/slick
 	url = https://github.com/mootools/slick.git
 [submodule "lib/ast-js"]
 	path = lib/ast-js
-	url = https://github.com/sebmarkbage/ast-js.git
+	url = https://github.com/sudodoki/ast-js.git
