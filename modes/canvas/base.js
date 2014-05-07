@@ -139,7 +139,7 @@ var Base = Class(Node, {
 			h = height ? height / img.height : 1;
 		if (color1 != null) img = recolorImage(img, color1, color2);
 		this._fill = genericContext.createPattern(img, 'repeat');
-		this._fillTransform = new Transform(w, 0, 0, h);
+		this._fillTransform = new Transform(w, 0, 0, h, left, top);
 		return this.invalidate();
 	},
 
