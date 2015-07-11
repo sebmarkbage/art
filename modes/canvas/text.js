@@ -23,8 +23,11 @@ module.exports = Class(Base, {
 				(font.fontWeight || font['font-weight'] || '') + ' ' +
 				em + 'px ' +
 				(font.fontFamily || font['font-family'] || 'Arial');
-		} else {
+		} else if(this._font) {
 			font = this._font;
+		} else {
+			em = 12;
+			font = '12px Arial';
 		}
 
 		var lines = text && text.split(/\r?\n/);
