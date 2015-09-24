@@ -148,7 +148,7 @@ var Base = Class(Node, {
 	},
 
 	stroke: function(color, width, cap, join, dash){
-		this._stroke = color ? new Color(color).toString() : null;
+		this._stroke = (color && width !== 0) ? new Color(color).toString() : null;
 		this._strokeWidth = (width != null) ? width : 1;
 		this._strokeCap = (cap != null) ? cap : 'round';
 		this._strokeJoin = (join != null) ? join : 'round';
