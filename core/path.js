@@ -95,8 +95,8 @@ module.exports = Class({
 		if (ex == null){
 			this._pivotX = +c1x; this._pivotY = +c1y;
 			ex = +c2x; ey = +c2y;
-			c2x = (ex + (+c1x) * 2) / 3; c2y = (ey + (+c1y) * 2) / 3;
-			c1x = (x + (+c1x) * 2) / 3; c1y = (y + (+c1y) * 2) / 3;
+			c2x = ((ex + (+c1x)) * 2) / 3; c2y = ((ey + (+c1y)) * 2) / 3;
+			c1x = ((x + (+c1x)) * 2) / 3; c1y = ((y + (+c1y)) * 2) / 3;
 		} else {
 			this._pivotX = +c2x; this._pivotY = +c2y;
 		}
