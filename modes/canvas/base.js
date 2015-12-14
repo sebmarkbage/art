@@ -162,7 +162,7 @@ var Base = Class(Node, {
         this._shadowOffsetX = (x != null) ? x : 0;
         this._shadowOffsetY = (y != null) ? y: 0;
         return this.invalidate();
-    }
+    },
 
 	// Rendering
 
