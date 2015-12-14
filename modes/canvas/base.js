@@ -156,6 +156,14 @@ var Base = Class(Node, {
 		return this.invalidate();
 	},
 
+    shadow: function(color, blur, x, y) {
+        this._shadow = color ? new Color(color).toString() : null;
+        this._shadowBlur = (blur != null) ? blur : 3;
+        this._shadowOffsetX = (x != null) ? x : 0;
+        this._shadowOffsetY = (y != null) ? y: 0;
+        return this.invalidate();
+    }
+
 	// Rendering
 
 	element_renderTo: Node.prototype.renderTo,
