@@ -16,7 +16,6 @@ module.exports = Class(Node, {
 	},
 
 	_place: function(){
-		console.log('_place', this.shadowFilter);
 		if (this.parentNode){
 			this._injectBrush('fill');
 			this._injectBrush('stroke');
