@@ -90,13 +90,20 @@ module.exports = Class(Base, {
 				context.fill();
 			}
 		}
-		
+
 		if (stroke){
 			context.strokeStyle = stroke;
 			context.lineWidth = this._strokeWidth;
 			context.lineCap = this._strokeCap;
 			context.lineJoin = this._strokeJoin;
 			context.stroke();
+		}
+		
+		if (shadow) {
+			context.shadowColor = 0;
+			context.shadowOffsetX = 0;
+			context.shadowOffsetY = 0;
+			context.shadowBlur = 0;
 		}
 	}
 
