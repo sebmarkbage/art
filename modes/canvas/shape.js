@@ -69,7 +69,7 @@ module.exports = Class(Base, {
 
 		for (var i = 0, l = commands.length; i < l; i++)
 			commands[i](context);
-
+		
 		if (shadow) {
 			context.shadowColor = shadow;
 			context.shadowBlur = this._shadowBlur;
@@ -98,7 +98,7 @@ module.exports = Class(Base, {
 			context.lineJoin = this._strokeJoin;
 			context.stroke();
 		}
-		
+
 		if (shadow) {
 			context.shadowColor = 0;
 			context.shadowOffsetX = 0;

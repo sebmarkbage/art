@@ -157,10 +157,12 @@ var Base = Class(Node, {
 	},
 
     shadow: function(color, blur, x, y) {
+        var resolution = typeof window !== 'undefined' && window.devicePixelRatio || 1;
+
         this._shadow = color ? new Color(color).toString() : null;
-        this._shadowBlur = (blur != null) ? blur : 3;
-        this._shadowOffsetX = (x != null) ? x : 0;
-        this._shadowOffsetY = (y != null) ? y: 0;
+        this._shadowBlur = ((blur != null) ? blur : 3) * resolution;
+        this._shadowOffsetX = ((x != null) ? x : 0) * resolution;
+        this._shadowOffsetY = ((y != null) ? y: 0) * resolution;
         return this.invalidate();
     },
 
