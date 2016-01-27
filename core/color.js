@@ -48,16 +48,16 @@ var map = function(array, fn){
 };
 
 var Color = function(color, type){
-	
+
 	if (color.isColor){
-		
+
 		this.red = color.red;
 		this.green = color.green;
 		this.blue = color.blue;
 		this.alpha = color.alpha;
 
 	} else {
-		
+
 		var namedColor = colors[color];
 		if (namedColor){
 			color = namedColor;
@@ -76,7 +76,7 @@ var Color = function(color, type){
 		this.blue = color[2];
 		this.alpha = color[3];
 	}
-	
+
 	this.isColor = true;
 
 };
@@ -88,6 +88,7 @@ var limit = function(number, min, max){
 var listMatch = /([-.\d]+\%?)\s*,\s*([-.\d]+\%?)\s*,\s*([-.\d]+\%?)\s*,?\s*([-.\d]*\%?)/;
 var hexMatch = /^#?([a-f0-9]{1,2})([a-f0-9]{1,2})([a-f0-9]{1,2})([a-f0-9]{0,2})$/i;
 var defaultColorArray = ["00", "00", "00", ""];  // black
+var transparentArray = ["00", "00", "00", "00"];
 
 Color.parseRGB = function(color){
 	// if a color is not matched, fall back to black
@@ -97,17 +98,20 @@ Color.parseRGB = function(color){
 		return (i < 3) ? Math.round(((bit %= 256) < 0) ? bit + 256 : bit) : limit(((bit === '') ? 1 : Number(bit)), 0, 1);
 	});
 };
-	
+
 Color.parseHEX = function(color){
 	if (color.length == 1) color = color + color + color;
+	var colorArray
+	// handle transparent and none
+	if (color === 'transparent' || 'none') colorArray = transparentArray;
 	// if a color is not matched, fall back to black
-	var colorArray = color.match(hexMatch) ? color.match(hexMatch).slice(1) : defaultColorArray;
+	else colorArray = color.match(hexMatch) ? color.match(hexMatch).slice(1) : defaultColorArray;
 	return map(colorArray, function(bit, i){
 		if (i == 3) return (bit) ? parseInt(bit, 16) / 255 : 1;
 		return parseInt((bit.length == 1) ? bit + bit : bit, 16);
 	});
 };
-	
+
 Color.parseHSB = function(color){
 	// if a color is not matched, fall back to black
 	var colorArray = color.match(listMatch) ? color.match(listMatch).slice(1) : defaultColorArray;
@@ -117,11 +121,11 @@ Color.parseHSB = function(color){
 		else if (i < 3) return limit(Math.round(bit), 0, 100);
 		else return limit(((bit === '') ? 1 : Number(bit)), 0, 1);
 	});
-	
+
 	var a = hsb[3];
 	var br = Math.round(hsb[2] / 100 * 255);
 	if (hsb[1] == 0) return [br, br, br, a];
-		
+
 	var hue = hsb[0];
 	var f = hue % 60;
 	var p = Math.round((hsb[2] * (100 - hsb[1])) / 10000 * 255);
@@ -152,11 +156,11 @@ Color.parseHSL = function(color){
 	var s = hsb[1] / 100;
 	var l = hsb[2] / 100;
 	var a = hsb[3];
-	
+
 	var c = (1 - Math.abs(2 * l - 1)) * s;
 	var x = c * (1 - Math.abs(h % 2 - 1));
 	var m = l - c / 2;
-	
+
 	var p = Math.round((c + m) * 255);
 	var q = Math.round((x + m) * 255);
 	var t = Math.round((m) * 255);
@@ -215,15 +219,15 @@ Color.prototype = {
 
 		var a = this.alpha;
 		var alpha = ((a = Math.round((a * 255)).toString(16)).length == 1) ? a + a : a;
-		
+
 		var hex = map([this.red, this.green, this.blue], function(bit){
 			bit = bit.toString(16);
 			return (bit.length == 1) ? '0' + bit : bit;
 		});
-		
+
 		return (array) ? hex.concat(alpha) : '#' + hex.join('') + ((alpha == 'ff') ? '' : alpha);
 	},
-	
+
 	toRGB: function(array){
 		var rgb = [this.red, this.green, this.blue, this.alpha];
 		return (array) ? rgb : toString('rgb', rgb);
