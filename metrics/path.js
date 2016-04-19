@@ -19,10 +19,10 @@ module.exports = Class(Path, {
 	onLine: function(sx, sy, ex, ey){
 		var x = ex - sx, y = ey - sy;
 		this.points.push((this.length += Math.sqrt(x * x + y * y)), ex, ey);
-		this.left   = Math.min(this.left,   sx, x);
-		this.right  = Math.max(this.right,  sx, x);
-		this.top    = Math.min(this.top,    sy, y);
-		this.bottom = Math.max(this.bottom, sy, y);
+		this.left   = Math.min(this.left,   sx, ex);
+		this.right  = Math.max(this.right,  sx, ex);
+		this.top    = Math.min(this.top,    sy, ey);
+		this.bottom = Math.max(this.bottom, sy, ey);
 		this.width  = this.right - this.left;
 		this.height = this.bottom - this.top;
 	},
