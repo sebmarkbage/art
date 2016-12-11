@@ -1,7 +1,7 @@
 var hasCanvas = function(){
 
   var canvas = document.createElement('canvas');
-  return canvas && !!canvas.getContext;
+  return canvas && !!canvas.getContext("2d");
 
 };
 
