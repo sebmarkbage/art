@@ -134,7 +134,7 @@ SVGParser.implement({
 
 			if (row){
 				var pad = row.pad || '';
-				row.pad = (/[\s ]*$/).exec(text)[0];
+				row.pad = (/[\s\xA0]*$/).exec(text)[0];
 				if (row.length == 0) text = text.replace(/^\s+/, '');
 				text = pad + text.replace(/\s+$/, '');
 			} else {
