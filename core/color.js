@@ -193,25 +193,25 @@ Color.hex = function(hex){
 	return new Color(hex, 'hex');
 };
 
-if (this.hex == null) this.hex = Color.hex;
+if (this && this.hex == null) this.hex = Color.hex;
 
 Color.hsb = function(h, s, b, a){
 	return new Color([h || 0, s || 0, b || 0, (a == null) ? 1 : a], 'hsb');
 };
 
-if (this.hsb == null) this.hsb = Color.hsb;
+if (this && this.hsb == null) this.hsb = Color.hsb;
 
 Color.hsl = function(h, s, l, a){
 	return new Color([h || 0, s || 0, l || 0, (a == null) ? 1 : a], 'hsl');
 };
 
-if (this.hsl == null) this.hsl = Color.hsl;
+if (this && this.hsl == null) this.hsl = Color.hsl;
 
 Color.rgb = function(r, g, b, a){
 	return new Color([r || 0, g || 0, b || 0, (a == null) ? 1 : a], 'rgb');
 };
 
-if (this.rgb == null) this.rgb = Color.rgb;
+if (this && this.rgb == null) this.rgb = Color.rgb;
 
 Color.detach = function(color){
 	color = new Color(color);
