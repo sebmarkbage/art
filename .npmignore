@@ -5,6 +5,7 @@ tests/
 node_modules
 npm-debug.log
 .DS_Store
+.gitmodules
 lib/ast.js/.git
 lib/ast.js/Demos
 lib/slick/.git
