@@ -2,6 +2,21 @@ var Class = require('../../core/class');
 var Container = require('../../dom/container');
 var Element = require('../../dom/native');
 
+(function() {
+  if (window.requestAnimationFrame) {
+    return;
+  }
+
+  var vendors = ['ms', 'moz', 'webkit', 'o'];
+  for (var i = 0; i < vendors.length; i++) {
+    var rafName = vendors[i] + 'RequestAnimationFrame';
+    if (window[rafName]) {
+      window.requestAnimationFrame = window[rafName];
+      break;
+    }
+  }
+})();
+
 var fps = 1000 / 60, invalids = [], renderTimer, renderInvalids = function(){
 	clearTimeout(renderTimer);
 	renderTimer = null;
@@ -102,9 +117,9 @@ var CanvasSurface = Class(Element, Container, {
 			this._valid = false;
 			invalids.push(this);
 			if (!renderTimer){
-				if (window.mozRequestAnimationFrame){
+				if (window.requestAnimationFrame){
 					renderTimer = true;
-					window.mozRequestAnimationFrame(renderInvalids);
+					window.requestAnimationFrame(renderInvalids);
 				} else {
 					renderTimer = setTimeout(renderInvalids, fps);
 				}
