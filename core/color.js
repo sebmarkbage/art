@@ -193,7 +193,7 @@ Color.hex = function(hex){
 	return new Color(hex, 'hex');
 };
 
-if (this.hex == null) this.hex = Color.hex;
+if (this && this.hex == null) this.hex = Color.hex;
 
 Color.hsb = function(h, s, b, a){
 	return new Color([h || 0, s || 0, b || 0, (a == null) ? 1 : a], 'hsb');
