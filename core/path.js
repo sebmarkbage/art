@@ -10,6 +10,7 @@ module.exports = Class({
 	
 	push: function(){
 		var p = Array.prototype.join.call(arguments, ' ')
+			.replace(/(\.[\d]+)(\-?\.)/ig, '$1,$2') //convert something like this `-.3-.575` to `-.3,-.575`
 			.match(/[a-df-z]|[\-+]?(?:[\d\.]e[\-+]?|[^\s\-+,a-z])+/ig);
 		if (!p) return this;
 
