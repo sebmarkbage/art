@@ -1,6 +1,12 @@
 var Class = require('../../core/class');
 var Path = require('../../core/path');
 
+var MOVE         = 0,
+    LINE         = 1,
+    BEZIER_CURVE = 2,
+    ARC          = 3,
+    CLOSE        = 4;
+
 var CanvasPath = Class(Path, {
 
 	initialize: function(path){
@@ -20,36 +26,26 @@ var CanvasPath = Class(Path, {
 	},
 
 	onMove: function(sx, sy, x, y){
-		this.path.push(function(context){
-			context.moveTo(x, y);
-		});
+		this.path.push(MOVE, x, y);
 	},
 
 	onLine: function(sx, sy, x, y){
-		this.path.push(function(context){
-			context.lineTo(x, y);
-		});
+		this.path.push(LINE, x, y);
 	},
 
 	onBezierCurve: function(sx, sy, p1x, p1y, p2x, p2y, x, y){
-		this.path.push(function(context){
-			context.bezierCurveTo(p1x, p1y, p2x, p2y, x, y);
-		});
+		this.path.push(BEZIER_CURVE, p1x, p1y, p2x, p2y, x, y);
 	},
 
 	_arcToBezier: Path.prototype.onArc,
 
 	onArc: function(sx, sy, ex, ey, cx, cy, rx, ry, sa, ea, ccw, rotation){
 		if (rx != ry || rotation) return this._arcToBezier(sx, sy, ex, ey, cx, cy, rx, ry, sa, ea, ccw, rotation);
-		this.path.push(function(context){
-			context.arc(cx, cy, rx, sa, ea, ccw);
-		});
+		this.path.push(ARC, cx, cy, rx, sa, ea, ccw);
 	},
 
 	onClose: function(){
-		this.path.push(function(context){
-			context.closePath();
-		});
+		this.path.push(CLOSE);
 	},
 
 	toCommands: function(){
@@ -57,5 +53,11 @@ var CanvasPath = Class(Path, {
 	}
 
 });
+
+CanvasPath.MOVE = MOVE;
+CanvasPath.LINE = LINE;
+CanvasPath.BEZIER_CURVE = BEZIER_CURVE;
+CanvasPath.ARC = ARC;
+CanvasPath.CLOSE = CLOSE;
 
 module.exports = CanvasPath;

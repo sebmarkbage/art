@@ -2,6 +2,40 @@ var Class = require('../../core/class');
 var Base = require('./base');
 var Path = require('./path');
 
+var MOVE = Path.MOVE;
+var LINE = Path.LINE;
+var BEZIER_CURVE = Path.BEZIER_CURVE;
+var ARC = Path.ARC;
+var CLOSE = Path.CLOSE;
+
+function executeCommands(context, commands) {
+	var i = 0, l = commands.length, cmd;
+	while (i < l) {
+		cmd = commands[i++];
+		switch (cmd) {
+		case MOVE:
+			context.moveTo(commands[i++], commands[i++]);
+			break;
+		case LINE:
+			context.lineTo(commands[i++], commands[i++]);
+			break;
+		case BEZIER_CURVE:
+			context.bezierCurveTo(
+				commands[i++], commands[i++], commands[i++],
+				commands[i++], commands[i++], commands[i++]);
+		      break;
+		case ARC:
+			context.arc(
+				commands[i++], commands[i++], commands[i++],
+				commands[i++], commands[i++], commands[i++]);
+			break;
+		case CLOSE:
+			context.closePath();
+			break;
+		}
+	}
+}
+
 module.exports = Class(Base, {
 
 	base_initialize: Base.prototype.initialize,
@@ -28,8 +62,7 @@ module.exports = Class(Base, {
 			var context = Base._genericContext, commands = this._commands;
 			if (!commands) return null;
 			context.beginPath();
-			for (var i = 0, l = commands.length; i < l; i++)
-				commands[i](context);
+			executeCommands(context, commands);
 			return context.isPointInPath(x, y) ? this : null;
 		}
 		if (x > 0 && y > 0 && x < this.width && y < this.height){
@@ -66,8 +99,7 @@ module.exports = Class(Base, {
 			}
 		}
 
-		for (var i = 0, l = commands.length; i < l; i++)
-			commands[i](context);
+		executeCommands(context, commands);
 
 		if (fill){
 			var m = this._fillTransform;
