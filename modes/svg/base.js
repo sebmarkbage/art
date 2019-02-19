@@ -19,11 +19,25 @@ module.exports = Class(Node, {
 		if (this.parentNode){
 			this._injectBrush('fill');
 			this._injectBrush('stroke');
+			this._injectShadow();
 		} else {
 			this._ejectBrush('fill');
 			this._ejectBrush('stroke');
+			this._ejectShadow();
 		}
 		return this;
+	},
+
+	_injectShadow: function() {
+		if (!this.parentNode) return;
+		if (this.shadowFilter) this.parentNode.defs.appendChild(this.shadowFilter);
+	},
+
+	_ejectShadow: function() {
+		var shadowFilter = this.shadowFilter;
+		if (shadowFilter && shadowFilter.parentNode) {
+			shadowFilter.parentNode.removeChild(shadowFilter);
+		}
 	},
 
 	_injectBrush: function(type){
@@ -225,6 +239,45 @@ module.exports = Class(Node, {
 			element.setAttribute('stroke-dasharray', dash.join(','));
 		}
 		this._setColor('stroke', color);
+		return this;
+	},
+
+	shadow: function(color, blur, x, y) {
+		var element = this.element;
+
+		this._ejectShadow();
+
+		var filter = createElement('filter');
+		filter.setAttribute('id', 'shadowfilter' + this.uid);
+		filter.setAttribute('x', '-20%');
+		filter.setAttribute('y', '-20%');
+		filter.setAttribute('width', '200%');
+		filter.setAttribute('height', '200%');
+
+		var offset = createElement('feOffset');
+		offset.setAttribute('result', 'offOut');
+		offset.setAttribute('in', 'SourceAlpha');
+		offset.setAttribute('dx', x / 2);
+		offset.setAttribute('dy', y / 2);
+
+		var gaussianBlur = createElement('feGaussianBlur');
+		gaussianBlur.setAttribute('result', 'blurOut');
+		gaussianBlur.setAttribute('in', 'offOut');
+		gaussianBlur.setAttribute('stdDeviation', blur / 2);
+
+		var blend = createElement('feBlend');
+		blend.setAttribute('in', 'SourceGraphic');
+		blend.setAttribute('in2', 'blurOut');
+		blend.setAttribute('mode', 'normal');
+		filter.appendChild(offset);
+		filter.appendChild(gaussianBlur);
+		filter.appendChild(blend);
+
+		this.shadowFilter = filter;
+		this._injectShadow();
+
+		element.setAttribute('filter', 'url(#shadowfilter' + this.uid + ')');
+
 		return this;
 	}
 

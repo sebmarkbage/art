@@ -46,6 +46,7 @@ module.exports = Class(Base, {
 		var commands = this._commands,
 		    fill = this._fill,
 		    stroke = this._stroke,
+			shadow = this._shadow,
 		    dash = this._strokeDash;
 
 		context.beginPath();
@@ -68,6 +69,13 @@ module.exports = Class(Base, {
 
 		for (var i = 0, l = commands.length; i < l; i++)
 			commands[i](context);
+		
+		if (shadow) {
+			context.shadowColor = shadow;
+			context.shadowBlur = this._shadowBlur;
+			context.shadowOffsetX = this._shadowOffsetX;
+			context.shadowOffsetY = this._shadowOffsetY;
+		}
 
 		if (fill){
 			var m = this._fillTransform;
@@ -82,12 +90,20 @@ module.exports = Class(Base, {
 				context.fill();
 			}
 		}
+
 		if (stroke){
 			context.strokeStyle = stroke;
 			context.lineWidth = this._strokeWidth;
 			context.lineCap = this._strokeCap;
 			context.lineJoin = this._strokeJoin;
 			context.stroke();
+		}
+
+		if (shadow) {
+			context.shadowColor = 0;
+			context.shadowOffsetX = 0;
+			context.shadowOffsetY = 0;
+			context.shadowBlur = 0;
 		}
 	}
 
