@@ -168,16 +168,13 @@ Color.prototype = {
 	},
 
 	toHEX: function(array){
-
-		var a = this.alpha;
-		var alpha = ((a = Math.round((a * 255)).toString(16)).length == 1) ? a + a : a;
 		
-		var hex = map([this.red, this.green, this.blue], function(bit){
+		var hex = map([this.red, this.green, this.blue, Math.round(this.alpha * 255)], function(bit){
 			bit = bit.toString(16);
 			return (bit.length == 1) ? '0' + bit : bit;
 		});
 		
-		return (array) ? hex.concat(alpha) : '#' + hex.join('') + ((alpha == 'ff') ? '' : alpha);
+		return (array) ? hex : '#' + hex.join('');
 	},
 	
 	toRGB: function(array){
